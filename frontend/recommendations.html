@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Recommendations - GymBuddy AI</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+</head>
+
+<body onload="requireLogin(); loadRecommendations();">
+
+    <h1>Workout Partner Recommendations</h1>
+
+    <p>
+        GymBuddy AI ranked these workout partners based on
+        fitness similarity and schedule compatibility.
+    </p>
+
+    <div id="recommendationStatus">
+        Loading recommendations...
+    </div>
+
+    <div id="recommendationList"></div>
+
+    <br>
+
+    <button
+        type="button"
+        class="primary-button"
+        onclick="goToDashboard()"
+    >
+        Back to Dashboard
+    </button>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

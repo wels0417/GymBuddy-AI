@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard - GymBuddy AI</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+<body onload="requireLogin()">
+
+    <h1>GymBuddy AI</h1>
+
+    <h2>
+        Welcome, <span id="userName">User</span>!
+    </h2>
+
+    <p>
+        Find a compatible workout partner based on
+        your fitness profile, preferences, and schedule.
+    </p>
+
+
+    <!-- USER INFORMATION -->
+
+    <section>
+
+        <h2>My Information</h2>
+
+        <div id="userInfo">
+
+            <p>Loading information...</p>
+
+        </div>
+
+    </section>
+
+
+    <!-- FITNESS PROFILE -->
+
+    <section>
+
+        <h2>Fitness Profile</h2>
+
+        <div id="fitnessInfo">
+
+            <p>Loading fitness profile...</p>
+
+        </div>
+
+    </section>
+
+
+    <!-- WORKOUT PREFERENCES -->
+
+    <section>
+
+        <h2>Workout Preferences</h2>
+
+        <div id="preferenceInfo">
+
+            <p>Loading preferences...</p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SCHEDULE -->
+
+    <section>
+
+        <h2>My Schedule</h2>
+
+        <div id="dashboardSchedule">
+
+            <p>Loading schedule...</p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ACTION BUTTONS -->
+
+    <section class="dashboard-actions">
+
+    <h2>Workout Partner</h2>
+
+    <div class="action-buttons">
+
+        <button
+            type="button"
+            class="dashboard-action-button"
+            onclick="goToRecommendations()"
+        >
+            <span class="action-icon">🤝</span>
+            <span>
+                <strong>Find Workout Partners</strong>
+                <small>
+                    Discover compatible workout buddies
+                </small>
+            </span>
+        </button>
+
+        <button
+            type="button"
+            class="dashboard-action-button"
+            onclick="goToProfile()"
+        >
+            <span class="action-icon">👤</span>
+            <span>
+                <strong>View My Profile</strong>
+                <small>
+                    View and manage your fitness information
+                </small>
+            </span>
+        </button>
+
+    </div>
+
+    <button
+        type="button"
+        class="logout-button"
+        onclick="logout()"
+    >
+        Logout
+    </button>
+
+</section>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,349 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Give Feedback | GymBuddy AI</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="container">
+
+        <section class="section-card">
+
+            <h1>Give Feedback</h1>
+
+            <p>
+                Rate your workout buddy and share your experience.
+            </p>
+
+
+            <form id="feedbackForm">
+
+                <!-- RATING -->
+
+                <div class="input-group">
+
+                    <label for="rating">
+                        Rating
+                    </label>
+
+                    <select
+                        id="rating"
+                        required
+                    >
+
+                        <option value="">
+                            Select a rating
+                        </option>
+
+                        <option value="5">
+                            ⭐⭐⭐⭐⭐ Excellent
+                        </option>
+
+                        <option value="4">
+                            ⭐⭐⭐⭐ Very Good
+                        </option>
+
+                        <option value="3">
+                            ⭐⭐⭐ Good
+                        </option>
+
+                        <option value="2">
+                            ⭐⭐ Needs Improvement
+                        </option>
+
+                        <option value="1">
+                            ⭐ Poor
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- COMMENT -->
+
+                <div class="input-group">
+
+                    <label for="comment">
+                        Comment
+                    </label>
+
+                    <textarea
+                        id="comment"
+                        rows="5"
+                        placeholder="Share your experience with your workout buddy..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Submit Feedback
+                </button>
+
+
+                <!-- BACK -->
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    onclick="goBackToRecommendations()"
+                >
+                    ← Back to Recommendations
+                </button>
+
+
+                <p id="feedbackMessage"></p>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        const API_URL =
+            "http://127.0.0.1:8000";
+
+
+        const feedbackForm =
+            document.getElementById(
+                "feedbackForm"
+            );
+
+
+        feedbackForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                console.log(
+                    "Submit Feedback clicked"
+                );
+
+
+                const userId =
+                    localStorage.getItem(
+                        "user_id"
+                    );
+
+
+                /*
+                 * Get partner ID from URL.
+                 *
+                 * Example:
+                 * feedback.html?partner_id=7
+                 */
+
+                const urlParams =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+                const partnerId =
+                    urlParams.get(
+                        "partner_id"
+                    );
+
+
+                const rating =
+                    document.getElementById(
+                        "rating"
+                    ).value;
+
+
+                const comment =
+                    document.getElementById(
+                        "comment"
+                    ).value.trim();
+
+
+                const message =
+                    document.getElementById(
+                        "feedbackMessage"
+                    );
+
+
+                console.log(
+                    "User ID:",
+                    userId
+                );
+
+                console.log(
+                    "Partner ID:",
+                    partnerId
+                );
+
+                console.log(
+                    "Rating:",
+                    rating
+                );
+
+
+                if (!userId) {
+
+                    message.innerText =
+                        "Please log in first.";
+
+                    return;
+                }
+
+
+                if (!partnerId) {
+
+                    message.innerText =
+                        "Workout partner information is missing.";
+
+                    return;
+                }
+
+
+                if (!rating) {
+
+                    message.innerText =
+                        "Please select a rating.";
+
+                    return;
+                }
+
+
+                const feedbackData = {
+
+                    user_id:
+                        parseInt(userId),
+
+                    partner_id:
+                        parseInt(partnerId),
+
+                    rating:
+                        parseInt(rating),
+
+                    comment:
+                        comment || null
+
+                };
+
+
+                console.log(
+                    "Sending:",
+                    feedbackData
+                );
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${API_URL}/feedback`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify(
+                                        feedbackData
+                                    )
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    console.log(
+                        "Server response:",
+                        data
+                    );
+
+
+                    if (response.ok) {
+
+                        message.innerText =
+                            "Feedback submitted successfully!";
+
+
+                        setTimeout(
+                            function() {
+
+                                window.location.href =
+                                    "recommendations.html";
+
+                            },
+                            1000
+                        );
+
+                    }
+
+                    else {
+
+                        message.innerText =
+                            data.detail ||
+                            "Unable to submit feedback.";
+
+                    }
+
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Feedback error:",
+                        error
+                    );
+
+
+                    message.innerText =
+                        "Unable to connect to GymBuddy AI server.";
+
+                }
+
+            }
+        );
+
+
+        function goBackToRecommendations() {
+
+            window.location.href =
+                "recommendations.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+```

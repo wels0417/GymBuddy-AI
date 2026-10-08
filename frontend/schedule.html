@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Workout Schedule - GymBuddy AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="requireLogin()">
+
+    <h1>Workout Schedule</h1>
+
+    <p>
+        Add the days and times when you are available to work out.
+    </p>
+
+
+    <!-- ==================================================
+         SCHEDULE FORM
+    =================================================== -->
+
+    <form id="scheduleForm">
+
+        <label for="day">
+            Day
+        </label>
+
+        <select id="day" required>
+
+            <option value="">
+                Select day
+            </option>
+
+            <option value="Monday">
+                Monday
+            </option>
+
+            <option value="Tuesday">
+                Tuesday
+            </option>
+
+            <option value="Wednesday">
+                Wednesday
+            </option>
+
+            <option value="Thursday">
+                Thursday
+            </option>
+
+            <option value="Friday">
+                Friday
+            </option>
+
+            <option value="Saturday">
+                Saturday
+            </option>
+
+            <option value="Sunday">
+                Sunday
+            </option>
+
+        </select>
+
+
+        <label for="start_time">
+            Start Time
+        </label>
+
+        <input
+            type="time"
+            id="start_time"
+            required
+        >
+
+
+        <label for="end_time">
+            End Time
+        </label>
+
+        <input
+            type="time"
+            id="end_time"
+            required
+        >
+
+
+        <button
+            type="submit"
+            class="primary-button"
+        >
+            Add Schedule
+        </button>
+
+    </form>
+
+
+    <!-- ==================================================
+         SAVED SCHEDULES
+    =================================================== -->
+
+    <h2>Your Schedule</h2>
+
+    <div id="scheduleList">
+
+        <p>
+            No schedules added yet.
+        </p>
+
+    </div>
+
+
+    <button
+        type="button"
+        class="primary-button"
+        onclick="goToRecommendations()"
+    >
+        Continue to Recommendations
+    </button>
+
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

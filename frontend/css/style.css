@@ -1,0 +1,2239 @@
+
+/* =============================================
+   GYMBUDDY AI
+   DARK BLUE + NEON GREEN DESIGN
+   COMPLETE RESPONSIVE CSS
+   ====================================================== */
+
+
+/* ======================================================
+   GLOBAL
+   ====================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 40px 20px;
+
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            #12345a 0%,
+            #071525 35%,
+            #030a13 75%
+        );
+
+    color: #f1f5f9;
+
+    line-height: 1.6;
+
+    overflow-x: hidden;
+}
+
+
+/* ======================================================
+   MAIN CONTAINER EFFECT
+   ====================================================== */
+
+body > * {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ======================================================
+   HEADINGS
+   ====================================================== */
+
+h1 {
+    color: #39ff88;
+
+    font-size: clamp(28px, 5vw, 38px);
+
+    margin-bottom: 10px;
+
+    letter-spacing: -1px;
+
+    text-shadow:
+        0 0 8px rgba(57, 255, 136, 0.35);
+}
+
+h2 {
+    color: #ffffff;
+
+    margin-top: 30px;
+
+    margin-bottom: 15px;
+
+    font-size: clamp(21px, 4vw, 28px);
+}
+
+h3 {
+    color: #39ff88;
+
+    margin-top: 20px;
+
+    font-size: clamp(17px, 3vw, 21px);
+}
+
+
+/* ======================================================
+   PARAGRAPHS
+   ====================================================== */
+
+p {
+    color: #b8c7d9;
+}
+
+strong {
+    color: #ffffff;
+}
+
+
+/* ======================================================
+   LINKS
+   ====================================================== */
+
+a {
+    color: #39ff88;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition:
+        color 0.2s ease;
+}
+
+a:hover {
+    color: #7dffae;
+
+    text-decoration: underline;
+}
+
+
+/* ======================================================
+   FORMS
+   ====================================================== */
+
+form {
+    width: 100%;
+
+    background:
+        rgba(8, 24, 42, 0.92);
+
+    border:
+        1px solid rgba(57, 255, 136, 0.25);
+
+    border-radius: 16px;
+
+    padding:
+        clamp(20px, 4vw, 30px);
+
+    margin-top: 25px;
+
+    box-shadow:
+        0 0 25px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ======================================================
+   LABELS
+   ====================================================== */
+
+label {
+    display: block;
+
+    margin-top: 18px;
+
+    margin-bottom: 7px;
+
+    color: #dce7f3;
+
+    font-weight: bold;
+
+    font-size:
+        clamp(13px, 2vw, 15px);
+}
+
+
+/* ======================================================
+   INPUTS / SELECT / TEXTAREA
+   ====================================================== */
+
+input,
+select,
+textarea {
+    width: 100%;
+
+    min-height: 45px;
+
+    padding: 13px 15px;
+
+    border-radius: 9px;
+
+    border:
+        1px solid #29445f;
+
+    background:
+        #081827;
+
+    color: #ffffff;
+
+    font-size:
+        clamp(13px, 2vw, 15px);
+
+    outline: none;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.2s ease;
+}
+
+textarea {
+    min-height: 100px;
+
+    resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #70849a;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #39ff88;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(57, 255, 136, 0.15),
+
+        0 0 12px
+        rgba(57, 255, 136, 0.15);
+}
+
+
+/* ======================================================
+   BUTTONS
+   ====================================================== */
+
+button,
+.primary-button {
+    margin-top: 20px;
+
+    min-height: 45px;
+
+    padding: 12px 22px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background:
+        #39ff88;
+
+    color:
+        #03100a;
+
+    font-size:
+        clamp(13px, 2vw, 15px);
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+button:hover,
+.primary-button:hover {
+    background:
+        #6cffaa;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 0 18px
+        rgba(57, 255, 136, 0.45);
+}
+
+button:active,
+.primary-button:active {
+    transform:
+        translateY(0);
+}
+
+
+/* ======================================================
+   SECTIONS
+   ====================================================== */
+
+section {
+    width: 100%;
+
+    background:
+        rgba(8, 24, 42, 0.88);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 16px;
+
+    padding:
+        clamp(20px, 4vw, 25px);
+
+    margin-top: 20px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.2);
+}
+
+
+/* ======================================================
+   DASHBOARD INFORMATION
+   ====================================================== */
+
+#userInfo,
+#fitnessInfo,
+#preferenceInfo,
+#dashboardSchedule {
+    background:
+        #061522;
+
+    border:
+        1px solid #19344d;
+
+    border-radius: 10px;
+
+    padding: 18px;
+
+    margin-top: 10px;
+
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+#userInfo:hover,
+#fitnessInfo:hover,
+#preferenceInfo:hover,
+#dashboardSchedule:hover {
+    border-color:
+        rgba(57, 255, 136, 0.35);
+}
+
+
+/* ======================================================
+   SCHEDULE
+   ====================================================== */
+
+#scheduleList {
+    margin-top: 20px;
+}
+
+.schedule-item {
+    background:
+        #081827;
+
+    border-left:
+        4px solid #39ff88;
+
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 0 10px
+        rgba(57, 255, 136, 0.05);
+}
+
+
+/* ======================================================
+   PROFILE SCHEDULE ITEMS
+   ====================================================== */
+/* ======================================================
+   PROFILE SCHEDULE ITEMS
+   ====================================================== */
+
+.profile-schedule .schedule-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    background: #081827;
+
+    border-left: 4px solid #39ff88;
+
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 0 10px
+        rgba(57, 255, 136, 0.05);
+}
+
+.profile-schedule .schedule-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    min-width: 0;
+}
+
+.profile-schedule .schedule-info strong {
+    color: #ffffff;
+
+    font-size: 16px;
+}
+
+.profile-schedule .schedule-info span {
+    color: #b8c7d9;
+
+    font-size: 14px;
+}
+
+/* EDIT BUTTON */
+
+.profile-schedule .schedule-item .secondary-button {
+    width: auto;
+
+    min-width: 80px;
+
+    margin-top: 0;
+
+    padding: 9px 18px;
+
+    background: transparent;
+
+    color: #39ff88;
+
+    border: 1px solid #39ff88;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+.profile-schedule .schedule-item .secondary-button:hover {
+    background: #39ff88;
+
+    color: #03100a;
+
+    box-shadow:
+        0 0 15px
+        rgba(57, 255, 136, 0.35);
+
+    transform: translateY(-1px);
+}
+
+/* ======================================================
+   RECOMMENDATIONS
+   ====================================================== */
+
+#recommendationStatus {
+    margin-top: 25px;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(57, 255, 136, 0.08);
+
+    border:
+        1px solid
+        rgba(57, 255, 136, 0.2);
+
+    color: #a7ffc8;
+}
+
+.recommendation-card {
+    background:
+        linear-gradient(
+            145deg,
+            #0b2035,
+            #061421
+        );
+
+    border:
+        1px solid #193c54;
+
+    border-radius: 16px;
+
+    padding:
+        clamp(20px, 4vw, 25px);
+
+    margin-top: 20px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.3);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.recommendation-card:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(57, 255, 136, 0.5);
+
+    box-shadow:
+        0 0 25px
+        rgba(57, 255, 136, 0.08);
+}
+
+.recommendation-card h2 {
+    margin-top: 0;
+
+    color: #ffffff;
+}
+
+
+/* ======================================================
+   COMPATIBILITY SCORE
+   ====================================================== */
+
+.compatibility-score {
+    text-align: center;
+
+    background:
+        rgba(57, 255, 136, 0.08);
+
+    border:
+        1px solid
+        rgba(57, 255, 136, 0.25);
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    margin: 20px 0;
+}
+
+.compatibility-score h3 {
+    margin-top: 0;
+
+    font-size: 16px;
+
+    color: #b8c7d9;
+}
+
+.compatibility-score strong {
+    display: block;
+
+    font-size:
+        clamp(32px, 7vw, 42px);
+
+    color: #39ff88;
+
+    text-shadow:
+        0 0 12px
+        rgba(57, 255, 136, 0.35);
+}
+
+
+/* ======================================================
+   MATCHING REASONS
+   ====================================================== */
+
+.matching-reasons {
+    list-style: none;
+
+    padding: 0;
+
+    margin-top: 15px;
+}
+
+.matching-reasons li {
+    background:
+        #071a2a;
+
+    border:
+        1px solid #16364e;
+
+    border-radius: 8px;
+
+    padding: 10px 13px;
+
+    margin-bottom: 8px;
+
+    color: #d8e6f2;
+}
+
+
+/* ======================================================
+   BUDDY PROFILE
+   ====================================================== */
+
+.buddy-card {
+    background:
+        linear-gradient(
+            145deg,
+            #0b2035,
+            #061421
+        );
+
+    border:
+        1px solid #193c54;
+
+    border-radius: 16px;
+
+    padding:
+        clamp(20px, 5vw, 30px);
+
+    margin-top: 20px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.3);
+}
+
+.buddy-card h2 {
+    color: #39ff88;
+
+    font-size:
+        clamp(24px, 5vw, 30px);
+
+    margin-top: 0;
+}
+
+.buddy-card p {
+    padding: 8px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.05);
+}
+
+.buddy-card ul {
+    padding-left: 20px;
+}
+
+.buddy-card li {
+    margin-bottom: 8px;
+
+    color: #c9d7e5;
+}
+
+
+/* ======================================================
+   FEEDBACK
+   ====================================================== */
+
+#feedbackSection {
+    margin-top: 25px;
+}
+
+.feedback-summary {
+    background:
+        rgba(57, 255, 136, 0.08);
+
+    border:
+        1px solid
+        rgba(57, 255, 136, 0.25);
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+}
+
+.feedback-summary h3 {
+    margin-top: 0;
+
+    color: #39ff88;
+}
+
+.feedback-item {
+    background:
+        #081827;
+
+    border:
+        1px solid #19344d;
+
+    border-radius: 10px;
+
+    padding: 18px;
+
+    margin-bottom: 12px;
+}
+
+.feedback-item hr {
+    border: none;
+
+    border-top:
+        1px solid #19344d;
+}
+
+
+/* ======================================================
+   HORIZONTAL RULE
+   ====================================================== */
+
+hr {
+    border: none;
+
+    border-top:
+        1px solid #19344d;
+
+    margin: 20px 0;
+}
+
+
+/* ======================================================
+   LISTS
+   ====================================================== */
+
+ul {
+    color: #c9d7e5;
+}
+
+
+/* ======================================================
+   DASHBOARD ACTION BUTTONS
+   ====================================================== */
+
+.dashboard-actions {
+    margin-top: 25px;
+}
+
+.action-buttons {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-top: 15px;
+}
+
+.dashboard-action-button {
+    width: 100%;
+
+    margin-top: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0b2035,
+            #061421
+        );
+
+    border:
+        1px solid #193c54;
+
+    border-radius: 14px;
+
+    color: #ffffff;
+
+    text-align: left;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.dashboard-action-button:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        #39ff88;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0e2942,
+            #071a2a
+        );
+
+    box-shadow:
+        0 0 20px
+        rgba(57, 255, 136, 0.15);
+}
+
+.dashboard-action-button:active {
+    transform:
+        translateY(0);
+}
+
+.action-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background:
+        rgba(57, 255, 136, 0.10);
+
+    border:
+        1px solid
+        rgba(57, 255, 136, 0.25);
+
+    font-size: 22px;
+}
+
+.dashboard-action-button
+span:last-child {
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.dashboard-action-button strong {
+    color: #ffffff;
+
+    font-size: 16px;
+
+    margin-bottom: 3px;
+}
+
+.dashboard-action-button small {
+    color: #8fa5ba;
+
+    font-size: 13px;
+
+    font-weight: normal;
+}
+
+
+/* ======================================================
+   LOGOUT BUTTON
+   ====================================================== */
+
+.logout-button {
+    background:
+        transparent;
+
+    color:
+        #9fb2c5;
+
+    border:
+        1px solid #29445f;
+
+    margin-top: 25px;
+}
+
+.logout-button:hover {
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    color:
+        #ffffff;
+
+    border-color:
+        #5b7288;
+
+    box-shadow: none;
+}
+
+
+/* ======================================================
+   MY PROFILE PAGE
+   ====================================================== */
+
+.profile-page {
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+}
+
+
+/* ======================================================
+   PROFILE HEADER
+   ====================================================== */
+
+.profile-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0b2035,
+            #061421
+        );
+
+    border:
+        1px solid #193c54;
+
+    border-radius: 18px;
+
+    padding:
+        clamp(20px, 5vw, 30px);
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 15px 35px
+        rgba(0, 0, 0, 0.3);
+}
+
+.page-label {
+    color: #39ff88;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 5px;
+}
+
+.profile-header h1 {
+    margin: 0;
+}
+
+.profile-avatar {
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(57, 255, 136, 0.10);
+
+    border:
+        2px solid #39ff88;
+
+    font-size: 32px;
+
+    box-shadow:
+        0 0 25px
+        rgba(57, 255, 136, 0.18);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.profile-avatar:hover {
+    transform:
+        scale(1.05);
+
+    box-shadow:
+        0 0 35px
+        rgba(57, 255, 136, 0.3);
+}
+
+
+/* ======================================================
+   PROFILE SECTIONS
+   ====================================================== */
+
+.profile-section {
+    margin-top: 20px;
+
+    padding:
+        clamp(20px, 4vw, 25px);
+
+    background:
+        linear-gradient(
+            145deg,
+            #0b2035,
+            #061421
+        );
+
+    border:
+        1px solid #193c54;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.25);
+}
+
+.section-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 20px;
+}
+
+.section-title h2 {
+    margin: 0;
+
+    font-size:
+        clamp(20px, 4vw, 26px);
+}
+
+.section-title p {
+    margin: 2px 0 0;
+
+    font-size: 13px;
+
+    color: #8198ad;
+}
+
+.section-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background:
+        rgba(57, 255, 136, 0.10);
+
+    border:
+        1px solid
+        rgba(57, 255, 136, 0.25);
+
+    font-size: 20px;
+}
+
+
+/* ======================================================
+   PROFILE INFORMATION CARDS
+   ====================================================== */
+
+.profile-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+.profile-info-card {
+    padding: 18px;
+
+    background:
+        #061522;
+
+    border:
+        1px solid #19344d;
+
+    border-radius: 11px;
+
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.profile-info-card:hover {
+    border-color:
+        rgba(57, 255, 136, 0.45);
+
+    transform:
+        translateY(-2px);
+
+    background:
+        #071a2a;
+}
+
+.profile-info-card span {
+    display: block;
+
+    color:
+        #7f96aa;
+
+    font-size:
+        12px;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        1px;
+
+    margin-bottom:
+        7px;
+}
+
+.profile-info-card strong {
+    display: block;
+
+    color:
+        #ffffff;
+
+    font-size:
+        16px;
+
+    word-break: break-word;
+}
+
+
+/* ======================================================
+   PROFILE SCHEDULE
+   ====================================================== */
+
+.profile-schedule {
+    background:
+        #061522;
+
+    border:
+        1px solid #19344d;
+
+    border-radius:
+        11px;
+
+    padding:
+        18px;
+}
+
+.profile-schedule ul {
+    list-style:
+        none;
+
+    padding:
+        0;
+
+    margin:
+        0;
+}
+
+.profile-schedule li {
+    padding:
+        13px 15px;
+
+    margin-bottom:
+        8px;
+
+    background:
+        #081827;
+
+    border-left:
+        3px solid #39ff88;
+
+    border-radius:
+        7px;
+
+    color:
+        #d6e3ee;
+
+    word-break: break-word;
+}
+
+.profile-schedule li:last-child {
+    margin-bottom:
+        0;
+}
+
+
+/* ======================================================
+   PROFILE ACTION BUTTONS
+   ====================================================== */
+
+.profile-actions {
+    display:
+        flex;
+
+    gap:
+        15px;
+
+    margin-top:
+        25px;
+
+    margin-bottom:
+        30px;
+}
+
+.profile-main-button {
+    flex:
+        1;
+
+    margin-top:
+        0;
+
+    padding:
+        15px 20px;
+}
+
+.profile-back-button {
+    margin-top:
+        0;
+
+    background:
+        transparent;
+
+    color:
+        #b7c6d5;
+
+    border:
+        1px solid #29445f;
+}
+
+.profile-back-button:hover {
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        none;
+
+    border-color:
+        #526c83;
+}
+
+
+/* ======================================================
+   LOGIN PAGE
+   ====================================================== */
+
+.login-page {
+    min-height: 100vh;
+
+    min-height: 100dvh;
+
+    margin: 0;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    overflow-x: hidden;
+
+    overflow-y: auto;
+
+    background:
+        #030a13;
+}
+
+
+/* ======================================================
+   LOGIN MOVING BACKGROUND
+   ====================================================== */
+
+.gym-background {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    overflow: hidden;
+
+    z-index: 0;
+}
+
+.gym-slide {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background-size: cover;
+
+    background-position: center;
+
+    opacity: 0;
+
+    animation:
+        gymSlideshow 18s infinite;
+}
+
+.slide-1 {
+    background-image:
+        url("../images/gym1.jpg");
+
+    animation-delay:
+        0s;
+}
+
+.slide-2 {
+    background-image:
+        url("../images/gym2.jpg");
+
+    animation-delay:
+        6s;
+}
+
+.slide-3 {
+    background-image:
+        url("../images/gym3.jpg");
+
+    animation-delay:
+        12s;
+}
+
+
+/* ======================================================
+   GYM BACKGROUND ANIMATION
+   ====================================================== */
+
+@keyframes gymSlideshow {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            scale(1);
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    30% {
+        opacity: 1;
+
+        transform:
+            scale(1.08);
+    }
+
+    38% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            scale(1.08);
+    }
+}
+
+
+/* ======================================================
+   LOGIN DARK OVERLAY
+   ====================================================== */
+
+.gym-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(3, 10, 19, 0.88),
+            rgba(7, 21, 37, 0.74),
+            rgba(18, 52, 90, 0.78)
+        );
+
+    z-index: 1;
+}
+
+
+/* ======================================================
+   LOGIN CONTAINER
+   ====================================================== */
+
+.login-container {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 450px;
+
+    box-sizing: border-box;
+
+    margin: auto;
+
+    padding: 15px;
+
+    text-align: center;
+}
+
+
+/* ======================================================
+   LOGIN BRAND
+   ====================================================== */
+
+.login-brand {
+    text-align: center;
+
+    margin-bottom: 12px;
+}
+
+.login-logo {
+    width:
+        clamp(50px, 8vw, 65px);
+
+    height:
+        clamp(50px, 8vw, 65px);
+
+    margin:
+        0 auto 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        2px solid #39ff88;
+
+    border-radius: 18px;
+
+    color:
+        #39ff88;
+
+    font-size:
+        clamp(14px, 2.5vw, 18px);
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        1px;
+
+    background:
+        rgba(8, 24, 39, 0.8);
+
+    box-shadow:
+        0 0 15px
+        rgba(57, 255, 136, 0.25);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.login-logo:hover {
+    transform:
+        scale(1.05);
+
+    box-shadow:
+        0 0 25px
+        rgba(57, 255, 136, 0.35);
+}
+
+.login-brand h1 {
+    margin: 0;
+
+    color: white;
+
+    font-size:
+        clamp(26px, 5vw, 36px);
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1px;
+}
+
+.login-brand h1 span {
+    color:
+        #39ff88;
+
+    text-shadow:
+        0 0 10px
+        rgba(57, 255, 136, 0.5);
+}
+
+.login-tagline {
+    margin:
+        7px 0 0;
+
+    color:
+        #c9d7e5;
+
+    font-size:
+        clamp(12px, 2vw, 14px);
+}
+
+
+/* ======================================================
+   LOGIN MOTIVATIONAL QUOTES
+   ====================================================== */
+
+.quote-container {
+    position: relative;
+
+    width: 100%;
+
+    height: 30px;
+
+    margin-bottom: 10px;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+.quote {
+    position: absolute;
+
+    width: 100%;
+
+    margin: 0;
+
+    color:
+        #39ff88;
+
+    font-size:
+        clamp(11px, 2vw, 14px);
+
+    font-weight:
+        600;
+
+    line-height:
+        1.4;
+
+    opacity: 0;
+
+    animation:
+        quoteAnimation 16s infinite;
+}
+
+.quote-1 {
+    animation-delay:
+        0s;
+}
+
+.quote-2 {
+    animation-delay:
+        4s;
+}
+
+.quote-3 {
+    animation-delay:
+        8s;
+}
+
+.quote-4 {
+    animation-delay:
+        12s;
+}
+
+
+@keyframes quoteAnimation {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(8px);
+    }
+
+    8% {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+    20% {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+    25% {
+        opacity: 0;
+
+        transform:
+            translateY(-8px);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* ======================================================
+   LOGIN CARD
+   ====================================================== */
+
+.login-card {
+    width: 100%;
+
+    padding:
+        clamp(20px, 5vw, 32px);
+
+    box-sizing: border-box;
+
+    background:
+        rgba(8, 24, 39, 0.94);
+
+    border:
+        1px solid
+        rgba(57, 255, 136, 0.2);
+
+    border-radius:
+        clamp(15px, 4vw, 22px);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.45),
+
+        0 0 25px
+        rgba(57, 255, 136, 0.08);
+
+    backdrop-filter:
+        blur(12px);
+
+    text-align:
+        left;
+}
+
+.login-card h2 {
+    margin: 0;
+
+    color:
+        white;
+
+    font-size:
+        clamp(22px, 5vw, 27px);
+}
+
+.login-subtitle {
+    margin:
+        7px 0 22px;
+
+    color:
+        #91a5b8;
+
+    font-size:
+        clamp(12px, 2vw, 14px);
+
+    line-height:
+        1.5;
+}
+
+
+/* ======================================================
+   LOGIN INPUTS
+   ====================================================== */
+
+.input-group {
+    width: 100%;
+
+    text-align:
+        left;
+
+    margin-bottom:
+        16px;
+}
+
+.input-group label {
+    display:
+        block;
+
+    margin-bottom:
+        7px;
+
+    margin-top:
+        0;
+
+    color:
+        #d9e5ef;
+
+    font-size:
+        clamp(12px, 2vw, 13px);
+
+    font-weight:
+        600;
+}
+
+.input-group input {
+    width:
+        100%;
+
+    min-height:
+        45px;
+
+    padding:
+        12px 14px;
+
+    box-sizing:
+        border-box;
+
+    border:
+        1px solid #25415b;
+
+    border-radius:
+        10px;
+
+    outline:
+        none;
+
+    background:
+        #061421;
+
+    color:
+        white;
+
+    font-size:
+        clamp(13px, 2vw, 14px);
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.input-group input::placeholder {
+    color:
+        #667b8e;
+}
+
+.input-group input:focus {
+    border-color:
+        #39ff88;
+
+    box-shadow:
+        0 0 10px
+        rgba(57, 255, 136, 0.15);
+}
+
+
+/* ======================================================
+   LOGIN BUTTON
+   ====================================================== */
+
+.login-button {
+    width:
+        100%;
+
+    min-height:
+        46px;
+
+    margin-top:
+        7px;
+
+    padding:
+        12px 15px;
+
+    border:
+        none;
+
+    border-radius:
+        10px;
+
+    background:
+        #39ff88;
+
+    color:
+        #03100a;
+
+    font-size:
+        clamp(13px, 2vw, 14px);
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1px;
+
+    cursor:
+        pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.login-button:hover {
+    background:
+        #6cffaa;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 0 20px
+        rgba(57, 255, 136, 0.4);
+}
+
+.login-button:active {
+    transform:
+        translateY(0);
+}
+
+
+/* ======================================================
+   LOGIN MESSAGE
+   ====================================================== */
+
+.login-message {
+    min-height:
+        18px;
+
+    margin:
+        10px 0 0;
+
+    color:
+        #ff7070;
+
+    font-size:
+        clamp(11px, 2vw, 13px);
+
+    line-height:
+        1.4;
+}
+
+
+/* ======================================================
+   REGISTER LINK
+   ====================================================== */
+
+.register-link {
+    margin-top:
+        17px;
+
+    color:
+        #91a5b8;
+
+    font-size:
+        clamp(11px, 2vw, 13px);
+
+    line-height:
+        1.5;
+
+    text-align:
+        center;
+}
+
+.register-link a {
+    color:
+        #39ff88;
+
+    font-weight:
+        700;
+
+    text-decoration:
+        none;
+}
+
+.register-link a:hover {
+    text-decoration:
+        underline;
+}
+
+
+/* ======================================================
+   TABLET RESPONSIVE
+   ====================================================== */
+
+@media (max-width: 768px) {
+
+    body {
+        padding:
+            30px 15px;
+    }
+
+    body > * {
+        max-width:
+            100%;
+    }
+
+    .login-page {
+        padding:
+            15px;
+    }
+
+    .login-container {
+        max-width:
+            420px;
+    }
+
+    .profile-page {
+        max-width:
+            100%;
+    }
+
+    .profile-header {
+        padding:
+            24px;
+    }
+
+    .action-buttons {
+        gap:
+            14px;
+    }
+}
+
+
+/* ======================================================
+   MOBILE
+   ====================================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding:
+            25px 15px;
+    }
+
+    h1 {
+        font-size:
+            30px;
+    }
+
+    form,
+    section,
+    .buddy-card,
+    .recommendation-card {
+        padding:
+            20px;
+    }
+
+    button,
+    .primary-button {
+        width:
+            100%;
+    }
+
+
+    /* DASHBOARD */
+
+    .action-buttons {
+        grid-template-columns:
+            1fr;
+    }
+
+    .dashboard-action-button {
+        padding:
+            18px;
+    }
+
+
+    /* PROFILE */
+
+    .profile-header {
+        padding:
+            22px;
+
+        align-items:
+            flex-start;
+    }
+
+    .profile-avatar {
+        width:
+            55px;
+
+        height:
+            55px;
+
+        font-size:
+            24px;
+    }
+
+    .profile-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .profile-actions {
+        flex-direction:
+            column;
+    }
+
+    .profile-main-button,
+    .profile-back-button {
+        width:
+            100%;
+    }
+
+
+    /* LOGIN */
+
+    .login-page {
+        padding:
+            12px;
+    }
+
+    .login-container {
+        max-width:
+            100%;
+
+        padding:
+            8px;
+    }
+
+    .login-card {
+        padding:
+            22px 18px;
+    }
+
+    .quote-container {
+        height:
+            28px;
+
+        margin-bottom:
+            8px;
+    }
+
+    .input-group {
+        margin-bottom:
+            14px;
+    }
+}
+
+
+/* ======================================================
+   VERY SMALL HEIGHT
+   ====================================================== */
+
+@media (max-height: 650px) {
+
+    .login-page {
+        align-items:
+            flex-start;
+
+        padding-top:
+            15px;
+
+        padding-bottom:
+            15px;
+    }
+
+    .login-logo {
+        width:
+            45px;
+
+        height:
+            45px;
+
+        margin-bottom:
+            6px;
+    }
+
+    .login-brand h1 {
+        font-size:
+            25px;
+    }
+
+    .login-tagline {
+        margin-top:
+            4px;
+    }
+
+    .quote-container {
+        height:
+            25px;
+
+        margin-bottom:
+            5px;
+    }
+
+    .login-card {
+        padding-top:
+            18px;
+
+        padding-bottom:
+            18px;
+    }
+
+    .login-subtitle {
+        margin-bottom:
+            15px;
+    }
+}
+
+
+/* ======================================================
+   LARGE SCREENS
+   ====================================================== */
+
+@media (min-width: 1200px) {
+
+    .login-container {
+        max-width:
+            460px;
+    }
+
+    .profile-page {
+        max-width:
+            1000px;
+    }
+}
+
+
+/* ======================================================
+   EXTRA SMALL PHONES
+   ====================================================== */
+
+@media (max-width: 380px) {
+
+    body {
+        padding:
+            20px 10px;
+    }
+
+    h1 {
+        font-size:
+            27px;
+    }
+
+    h2 {
+        font-size:
+            20px;
+    }
+
+    form,
+    section,
+    .buddy-card,
+    .recommendation-card {
+        padding:
+            16px;
+    }
+
+    .dashboard-action-button {
+        gap:
+            10px;
+
+        padding:
+            15px;
+    }
+
+    .action-icon {
+        width:
+            42px;
+
+        height:
+            42px;
+
+        font-size:
+            19px;
+    }
+
+    .dashboard-action-button strong {
+        font-size:
+            14px;
+    }
+
+    .dashboard-action-button small {
+        font-size:
+            11px;
+    }
+
+    .profile-header {
+        padding:
+            18px;
+    }
+
+    .profile-avatar {
+        width:
+            48px;
+
+        height:
+            48px;
+
+        font-size:
+            20px;
+    }
+
+    .login-brand h1 {
+        font-size:
+            26px;
+    }
+
+    .login-card {
+        padding:
+            18px 15px;
+    }
+}
