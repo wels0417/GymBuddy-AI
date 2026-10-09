@@ -6,12 +6,6 @@ from sqlalchemy.orm import Session
 from pathlib import Path
 
 
-from fastapi import HTTPException
-from pydantic import BaseModel, Field
-from backend.ai_chat import get_ai_response
-
-app = FastAPI()
-
 from backend.database import engine, get_db
 from backend import models
 from backend import crud
@@ -32,6 +26,12 @@ from backend.schemas import (
     LoginResponse
 )
 
+
+from fastapi import HTTPException
+from pydantic import BaseModel, Field
+from backend.ai_chat import get_ai_response
+
+app = FastAPI()
 
 class AIChatRequest(BaseModel):
     message: str = Field(min_length=1, max_length=2000)
