@@ -10,6 +10,8 @@ from fastapi import HTTPException
 from pydantic import BaseModel, Field
 from backend.ai_chat import get_ai_response
 
+app = FastAPI()
+
 from backend.database import engine, get_db
 from backend import models
 from backend import crud
