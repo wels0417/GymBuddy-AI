@@ -146,8 +146,985 @@
 </body>
 
 
+<div class="gb-dashboard">
+    <div class="gb-layout">
+
+        <!-- DESKTOP SIDEBAR -->
+        <aside class="gb-sidebar">
+            <div class="gb-brand">
+                <div class="gb-brand-icon">💪</div>
+                <span>GymBuddy AI</span>
+            </div>
+
+            <div class="gb-nav-label">WORKSPACE</div>
+
+            <nav class="gb-nav">
+                <a href="#gb-home" class="gb-active">
+                    <span class="gb-nav-icon">⌂</span> Dashboard
+                </a>
+                <a href="#gb-workouts">
+                    <span class="gb-nav-icon">🏋️</span> Workouts
+                </a>
+                <a href="#gb-progress">
+                    <span class="gb-nav-icon">📈</span> My Progress
+                </a>
+                <a href="#gb-goals">
+                    <span class="gb-nav-icon">🎯</span> Fitness Goals
+                </a>
+            </nav>
+
+            <div class="gb-sidebar-tip">
+                <span style="font-size:24px">✨</span>
+                <strong>Small steps matter!</strong>
+                <p>Consistency is more important than perfection. Keep showing up for yourself.</p>
+            </div>
+        </aside>
+
+        <!-- MAIN DASHBOARD -->
+        <main class="gb-main" id="gb-home">
+
+            <header class="gb-topbar">
+                <div>
+                    <h1 class="gb-page-title">Dashboard</h1>
+                    <p class="gb-page-subtitle">
+                        Your fitness journey, all in one place.
+                    </p>
+                </div>
+
+                <div class="gb-profile-chip">
+                    <div class="gb-profile-avatar" id="gb-avatar">G</div>
+                    <div class="gb-profile-details">
+                        <div class="gb-profile-name" id="gb-user-name">
+                            GymBuddy Member
+                        </div>
+                        <div class="gb-profile-caption">Fitness journey</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- WELCOME BANNER -->
+            <section class="gb-hero">
+                <div class="gb-hero-copy">
+                    <p class="gb-eyebrow">YOUR PERSONAL FITNESS SPACE</p>
+                    <h2 id="gb-welcome-title">
+                        Let's get stronger, one day at a time.
+                    </h2>
+                    <p>
+                        Build healthy habits, explore workout ideas, and
+                        take the next step toward your fitness goals.
+                    </p>
+
+                    <button class="gb-primary-button" type="button"
+                            id="gb-ask-ai">
+                        ✨ Ask GymBuddy AI <span>→</span>
+                    </button>
+                </div>
+
+                <div class="gb-hero-art" aria-hidden="true">🏆</div>
+            </section>
+
+            <!-- OVERVIEW CARDS -->
+            <div class="gb-section-heading">
+                <h3>Fitness Overview</h3>
+                <span>Sample values</span>
+            </div>
+
+            <section class="gb-stat-grid" aria-label="Fitness overview">
+
+                <article class="gb-stat-card">
+                    <div class="gb-stat-top">
+                        <span>Workouts completed</span>
+                        <span class="gb-stat-icon">🏋️</span>
+                    </div>
+                    <div class="gb-stat-value">0</div>
+                    <div class="gb-stat-caption">
+                        No completed workouts recorded yet
+                    </div>
+                </article>
+
+                <article class="gb-stat-card">
+                    <div class="gb-stat-top">
+                        <span>Active days</span>
+                        <span class="gb-stat-icon">📅</span>
+                    </div>
+                    <div class="gb-stat-value">0</div>
+                    <div class="gb-stat-caption">
+                        Start tracking your activity
+                    </div>
+                </article>
+
+                <article class="gb-stat-card">
+                    <div class="gb-stat-top">
+                        <span>Weekly goal</span>
+                        <span class="gb-stat-icon">🎯</span>
+                    </div>
+                    <div class="gb-stat-value">3 days</div>
+                    <div class="gb-stat-caption">
+                        Example goal; personalize it later
+                    </div>
+                </article>
+
+                <article class="gb-stat-card">
+                    <div class="gb-stat-top">
+                        <span>Goal progress</span>
+                        <span class="gb-stat-icon">📈</span>
+                    </div>
+                    <div class="gb-stat-value">0%</div>
+                    <div class="gb-stat-caption">
+                        Updates when workout tracking is connected
+                    </div>
+                </article>
+
+            </section>
+
+            <!-- WORKOUT SCHEDULE + GOALS -->
+            <section class="gb-content-grid">
+
+                <div class="gb-panel" id="gb-workouts">
+                    <h3 class="gb-panel-title">Suggested Workout Week</h3>
+                    <p class="gb-panel-description">
+                        An example schedule for planning your week.
+                        These sessions are not saved workout records.
+                    </p>
+
+                    <div class="gb-workout-list">
+
+                        <div class="gb-workout-row">
+                            <div class="gb-workout-icon">💪</div>
+                            <div class="gb-workout-copy">
+                                <strong>Full Body Workout</strong>
+                                <span>Beginner-friendly strength exercises</span>
+                            </div>
+                            <span class="gb-workout-day">MON</span>
+                        </div>
+
+                        <div class="gb-workout-row">
+                            <div class="gb-workout-icon">🚶</div>
+                            <div class="gb-workout-copy">
+                                <strong>Walking & Mobility</strong>
+                                <span>Light activity and gentle movement</span>
+                            </div>
+                            <span class="gb-workout-day">WED</span>
+                        </div>
+
+                        <div class="gb-workout-row">
+                            <div class="gb-workout-icon">🏃</div>
+                            <div class="gb-workout-copy">
+                                <strong>Strength & Conditioning</strong>
+                                <span>Adapt exercises to your fitness level</span>
+                            </div>
+                            <span class="gb-workout-day">FRI</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="gb-panel" id="gb-goals">
+                    <h3 class="gb-panel-title">Your Fitness Goals</h3>
+                    <p class="gb-panel-description">
+                        Start with a goal that fits your schedule and ability.
+                    </p>
+
+                    <div class="gb-goal-box" id="gb-progress">
+                        <div class="gb-goal-top">
+                            <span>Weekly workout target</span>
+                            <span>0 / 3</span>
+                        </div>
+
+                        <div class="gb-progress-track">
+                            <div class="gb-progress-fill"
+                                 id="gb-progress-fill"></div>
+                        </div>
+
+                        <div class="gb-goal-caption">
+                            This is a sample target. Progress will update
+                            once completed workouts are connected to your account.
+                        </div>
+                    </div>
+
+                    <div class="gb-quick-actions">
+                        <button class="gb-action-button" type="button"
+                                id="gb-create-plan">
+                            <span>📝</span>
+                            <span>Create a workout plan</span>
+                        </button>
+
+                        <button class="gb-action-button" type="button"
+                                id="gb-recovery">
+                            <span>🌿</span>
+                            <span>Get recovery tips</span>
+                        </button>
+
+                        <button class="gb-action-button" type="button"
+                                id="gb-motivation">
+                            <span>✨</span>
+                            <span>Get fitness motivation</span>
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <nav class="gb-mobile-nav" aria-label="Mobile navigation">
+        <a href="#gb-home" class="gb-active">
+            <span>⌂</span><span>Home</span>
+        </a>
+        <a href="#gb-workouts">
+            <span>🏋️</span><span>Workouts</span>
+        </a>
+        <a href="#gb-progress">
+            <span>📈</span><span>Progress</span>
+        </a>
+        <a href="#gb-goals">
+            <span>🎯</span><span>Goals</span>
+        </a>
+    </nav>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const storedName = localStorage.getItem("user_name");
+    const displayName = storedName
+        ? storedName.trim()
+        : "GymBuddy Member";
+
+    const nameElement = document.getElementById("gb-user-name");
+    const avatarElement = document.getElementById("gb-avatar");
+    const welcomeElement = document.getElementById("gb-welcome-title");
+
+    if (nameElement) {
+        nameElement.textContent = displayName || "GymBuddy Member";
+    }
+
+    if (avatarElement) {
+        avatarElement.textContent =
+            (displayName || "G").charAt(0).toUpperCase();
+    }
+
+    if (welcomeElement && displayName !== "GymBuddy Member") {
+        welcomeElement.textContent =
+            "Let's get stronger, " + displayName + "!";
+    }
+
+    // Connect dashboard actions to the existing chat.
+    function askGymBuddy(prompt) {
+        const chatBox = document.getElementById("gymbuddy-chat-box");
+        const chatButton = document.getElementById("gymbuddy-chat-button");
+        const chatInput = document.getElementById("gymbuddy-chat-input");
+        const chatForm = document.getElementById("gymbuddy-chat-form");
+
+        if (!chatBox || !chatButton || !chatInput || !chatForm) {
+            alert("GymBuddy AI chat could not be found on this page.");
+            return;
+        }
+
+        if (!chatBox.classList.contains("gymbuddy-open")) {
+            chatButton.click();
+        }
+
+        chatInput.value = prompt;
+        chatInput.focus();
+
+        // Submit through the existing chat handler.
+        chatForm.requestSubmit();
+    }
+
+    document.getElementById("gb-ask-ai")?.addEventListener("click", () => {
+        askGymBuddy("Help me choose a realistic fitness goal.");
+    });
+
+    document.getElementById("gb-create-plan")?.addEventListener("click", () => {
+        askGymBuddy(
+            "Create a beginner-friendly workout plan for 3 days a week."
+        );
+    });
+
+    document.getElementById("gb-recovery")?.addEventListener("click", () => {
+        askGymBuddy("Give me safe post-workout recovery tips.");
+    });
+
+    document.getElementById("gb-motivation")?.addEventListener("click", () => {
+        askGymBuddy("Help me stay consistent with my fitness goals.");
+    });
+
+    // Highlight the selected desktop or mobile navigation link.
+    document.querySelectorAll(
+        ".gb-nav a, .gb-mobile-nav a"
+    ).forEach(link => {
+        link.addEventListener("click", () => {
+            const target = link.getAttribute("href");
+
+            document.querySelectorAll(
+                ".gb-nav a, .gb-mobile-nav a"
+            ).forEach(item => {
+                item.classList.toggle(
+                    "gb-active",
+                    item.getAttribute("href") === target
+                );
+            });
+        });
+    });
+});
+</script>
+
 <!-- GymBuddy AI Floating Chat -->
 
+
+
+<style>
+    /* GymBuddy dashboard styles */
+    .gb-dashboard,
+    .gb-dashboard * {
+        box-sizing: border-box;
+    }
+
+    .gb-dashboard {
+        --gb-blue: #2563eb;
+        --gb-purple: #4f46e5;
+        --gb-ink: #172033;
+        --gb-muted: #718096;
+        --gb-border: #e7ebf2;
+        min-height: 100vh;
+        color: var(--gb-ink);
+        background: #f5f7fb;
+        font-family: Inter, -apple-system, BlinkMacSystemFont,
+            "Segoe UI", sans-serif;
+    }
+
+    .gb-layout {
+        display: grid;
+        grid-template-columns: 235px minmax(0, 1fr);
+        min-height: 100vh;
+    }
+
+    .gb-sidebar {
+        position: sticky;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        height: 100vh;
+        padding: 27px 17px;
+        background: #fff;
+        border-right: 1px solid var(--gb-border);
+    }
+
+    .gb-brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 0 8px;
+        font-size: 19px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+    }
+
+    .gb-brand-icon {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+        color: white;
+        background: linear-gradient(135deg, #2563eb, #6366f1);
+        font-size: 22px;
+    }
+
+    .gb-nav-label {
+        padding: 0 10px;
+        color: #9aa4b5;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1.3px;
+        text-transform: uppercase;
+    }
+
+    .gb-nav {
+        display: grid;
+        gap: 7px;
+    }
+
+    .gb-nav a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 12px;
+        color: #667085;
+        font-size: 13px;
+        font-weight: 650;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    .gb-nav a:hover,
+    .gb-nav a.gb-active {
+        color: #2458d3;
+        background: #edf3ff;
+    }
+
+    .gb-nav-icon {
+        width: 23px;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .gb-sidebar-tip {
+        margin-top: auto;
+        padding: 17px;
+        border: 1px solid #dce7ff;
+        border-radius: 16px;
+        background: linear-gradient(145deg, #eff6ff, #f5f3ff);
+    }
+
+    .gb-sidebar-tip strong {
+        display: block;
+        margin: 8px 0;
+        font-size: 13px;
+    }
+
+    .gb-sidebar-tip p {
+        margin: 0;
+        color: #667085;
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .gb-main {
+        min-width: 0;
+        padding: 30px clamp(18px, 3vw, 42px);
+    }
+
+    .gb-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 30px;
+    }
+
+    .gb-page-title {
+        margin: 0;
+        font-size: clamp(23px, 2.5vw, 30px);
+        font-weight: 800;
+        letter-spacing: -1px;
+    }
+
+    .gb-page-subtitle {
+        margin: 7px 0 0;
+        color: var(--gb-muted);
+        font-size: 13px;
+    }
+
+    .gb-profile-chip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border: 1px solid var(--gb-border);
+        border-radius: 14px;
+        background: white;
+    }
+
+    .gb-profile-avatar {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        color: #fff;
+        background: linear-gradient(135deg, #2563eb, #8b5cf6);
+        font-weight: 800;
+    }
+
+    .gb-profile-name {
+        max-width: 160px;
+        overflow: hidden;
+        font-size: 12px;
+        font-weight: 750;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .gb-profile-caption {
+        margin-top: 3px;
+        color: var(--gb-muted);
+        font-size: 11px;
+    }
+
+    .gb-hero {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 22px;
+        overflow: hidden;
+        margin-bottom: 24px;
+        padding: clamp(23px, 4vw, 38px);
+        border-radius: 23px;
+        color: white;
+        background: linear-gradient(115deg, #1d4ed8, #4338ca 75%, #6366f1);
+        box-shadow: 0 12px 30px rgba(37, 99, 235, 0.16);
+    }
+
+    .gb-hero::after {
+        position: absolute;
+        right: -55px;
+        bottom: -110px;
+        width: 280px;
+        height: 280px;
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 50%;
+        content: "";
+        box-shadow: 0 0 0 35px rgba(255,255,255,0.04),
+                    0 0 0 70px rgba(255,255,255,0.04);
+        pointer-events: none;
+    }
+
+    .gb-hero-copy {
+        position: relative;
+        z-index: 1;
+        max-width: 540px;
+    }
+
+    .gb-eyebrow {
+        margin: 0 0 12px;
+        color: #dbeafe;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+    }
+
+    .gb-hero h2 {
+        margin: 0;
+        font-size: clamp(25px, 3vw, 36px);
+        letter-spacing: -1.1px;
+        line-height: 1.2;
+    }
+
+    .gb-hero p {
+        margin: 12px 0 20px;
+        color: #e0e7ff;
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    .gb-primary-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 11px;
+        color: #1d4ed8;
+        background: white;
+        font-size: 12px;
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .gb-primary-button:hover {
+        transform: translateY(-2px);
+    }
+
+    .gb-hero-art {
+        position: relative;
+        z-index: 1;
+        flex-shrink: 0;
+        font-size: clamp(60px, 8vw, 92px);
+        filter: drop-shadow(0 10px 12px rgba(0,0,0,0.12));
+    }
+
+    .gb-section-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 28px 0 15px;
+    }
+
+    .gb-section-heading h3 {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 800;
+    }
+
+    .gb-section-heading span {
+        color: var(--gb-muted);
+        font-size: 11px;
+    }
+
+    .gb-stat-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 15px;
+    }
+
+    .gb-stat-card {
+        min-width: 0;
+        padding: 19px;
+        border: 1px solid var(--gb-border);
+        border-radius: 17px;
+        background: white;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .gb-stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .gb-stat-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        color: var(--gb-muted);
+        font-size: 11px;
+        font-weight: 650;
+    }
+
+    .gb-stat-icon {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+        border-radius: 11px;
+        background: #edf3ff;
+        font-size: 18px;
+    }
+
+    .gb-stat-value {
+        margin-top: 16px;
+        font-size: clamp(21px, 2.5vw, 29px);
+        font-weight: 850;
+        letter-spacing: -1px;
+    }
+
+    .gb-stat-caption {
+        margin-top: 6px;
+        color: #8a94a6;
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    .gb-content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.5fr) minmax(240px, 1fr);
+        gap: 18px;
+        margin-top: 25px;
+    }
+
+    .gb-panel {
+        min-width: 0;
+        padding: 22px;
+        border: 1px solid var(--gb-border);
+        border-radius: 18px;
+        background: white;
+    }
+
+    .gb-panel-title {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 800;
+    }
+
+    .gb-panel-description {
+        margin: 6px 0 19px;
+        color: var(--gb-muted);
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .gb-workout-list {
+        display: grid;
+        gap: 10px;
+    }
+
+    .gb-workout-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px;
+        border: 1px solid #edf0f5;
+        border-radius: 13px;
+        background: #fff;
+    }
+
+    .gb-workout-icon {
+        display: grid;
+        place-items: center;
+        width: 43px;
+        height: 43px;
+        flex-shrink: 0;
+        border-radius: 12px;
+        background: #eff6ff;
+        font-size: 21px;
+    }
+
+    .gb-workout-copy {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .gb-workout-copy strong {
+        display: block;
+        font-size: 12px;
+    }
+
+    .gb-workout-copy span {
+        display: block;
+        margin-top: 5px;
+        color: var(--gb-muted);
+        font-size: 11px;
+    }
+
+    .gb-workout-day {
+        flex-shrink: 0;
+        padding: 6px 8px;
+        border-radius: 8px;
+        color: #2458d3;
+        background: #edf3ff;
+        font-size: 10px;
+        font-weight: 800;
+    }
+
+    .gb-goal-box {
+        padding: 16px;
+        border-radius: 14px;
+        background: #f8faff;
+    }
+
+    .gb-goal-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 12px;
+        font-weight: 750;
+    }
+
+    .gb-progress-track {
+        height: 9px;
+        overflow: hidden;
+        margin: 14px 0 9px;
+        border-radius: 99px;
+        background: #e5eaf3;
+    }
+
+    .gb-progress-fill {
+        width: 0;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #2563eb, #818cf8);
+        transition: width 0.8s ease;
+    }
+
+    .gb-goal-caption {
+        color: var(--gb-muted);
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+    .gb-quick-actions {
+        display: grid;
+        gap: 10px;
+        margin-top: 16px;
+    }
+
+    .gb-action-button {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        width: 100%;
+        padding: 13px;
+        border: 1px solid var(--gb-border);
+        border-radius: 12px;
+        color: var(--gb-ink);
+        background: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        text-align: left;
+        cursor: pointer;
+        transition: border-color 0.2s, background 0.2s;
+    }
+
+    .gb-action-button:hover {
+        border-color: #b9ccff;
+        background: #f7f9ff;
+    }
+
+    .gb-action-button span:first-child {
+        font-size: 19px;
+    }
+
+    .gb-mobile-nav,
+    .gb-mobile-menu-button {
+        display: none;
+    }
+
+    @media (max-width: 1150px) {
+        .gb-stat-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .gb-content-grid {
+            grid-template-columns: minmax(0, 1.2fr) minmax(220px, 1fr);
+        }
+    }
+
+    @media (max-width: 820px) {
+        .gb-layout {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .gb-sidebar {
+            display: none;
+        }
+
+        .gb-main {
+            padding: 22px 18px 95px;
+        }
+
+        .gb-content-grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .gb-mobile-nav {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 9000;
+            display: flex;
+            justify-content: space-around;
+            gap: 5px;
+            padding: 10px 7px max(10px, env(safe-area-inset-bottom));
+            border-top: 1px solid var(--gb-border);
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(14px);
+        }
+
+        .gb-mobile-nav a {
+            display: grid;
+            justify-items: center;
+            gap: 4px;
+            min-width: 0;
+            padding: 5px;
+            color: #667085;
+            font-size: 10px;
+            text-decoration: none;
+        }
+
+        .gb-mobile-nav a span:first-child {
+            font-size: 19px;
+        }
+
+        .gb-mobile-nav a.gb-active {
+            color: #2563eb;
+            font-weight: 800;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .gb-main {
+            padding: 18px 13px 90px;
+        }
+
+        .gb-topbar {
+            margin-bottom: 22px;
+        }
+
+        .gb-page-title {
+            font-size: 23px;
+        }
+
+        .gb-profile-chip {
+            padding: 6px;
+            border: none;
+            background: transparent;
+        }
+
+        .gb-profile-details {
+            display: none;
+        }
+
+        .gb-hero {
+            align-items: flex-start;
+            gap: 8px;
+            padding: 24px 18px;
+            border-radius: 18px;
+        }
+
+        .gb-hero h2 {
+            font-size: 26px;
+        }
+
+        .gb-hero p {
+            font-size: 12px;
+        }
+
+        .gb-hero-art {
+            font-size: 47px;
+        }
+
+        .gb-stat-grid {
+            gap: 10px;
+        }
+
+        .gb-stat-card {
+            padding: 14px;
+            border-radius: 14px;
+        }
+
+        .gb-stat-top {
+            align-items: flex-start;
+            font-size: 10px;
+        }
+
+        .gb-stat-icon {
+            width: 31px;
+            height: 31px;
+            font-size: 15px;
+        }
+
+        .gb-stat-value {
+            font-size: 23px;
+        }
+
+        .gb-panel {
+            padding: 16px;
+        }
+
+        .gb-workout-row {
+            gap: 9px;
+            padding: 10px;
+        }
+
+        .gb-workout-day {
+            font-size: 9px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .gb-dashboard *,
+        .gb-dashboard *::before,
+        .gb-dashboard *::after {
+            scroll-behavior: auto !important;
+            animation: none !important;
+            transition: none !important;
+        }
+    }
+</style>
 
 <!-- ==========================================
      GYMBUDDY AI CHAT WIDGET
