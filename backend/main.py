@@ -1,3 +1,5 @@
+import logging
+
 from pydantic import BaseModel, Field
 from backend.ai_chat import get_ai_response
 
@@ -79,13 +81,15 @@ def ai_chat(request: AIChatRequest):
             detail=str(exc)
         )
 
-    except Exception:
+
+
+        # Inside ai_chat(), replace the existing except Exception block:
+    except Exception as exc:
+        logging.exception("GymBuddy AI request failed")
         raise HTTPException(
             status_code=502,
-            detail="The AI assistant is temporarily unavailable. Please try again."
+            detail="AI request failed. Check Railway logs for details."
         )
-
-
 
 
 # ======================================================
