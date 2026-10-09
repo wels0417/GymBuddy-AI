@@ -1,3 +1,6 @@
+from pydantic import BaseModel, Field
+from backend.ai_chat import get_ai_response
+
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
@@ -28,9 +31,6 @@ from backend.schemas import (
 
 
 
-from pydantic import BaseModel, Field
-from backend.ai_chat import get_ai_response
-
 
 # ======================================================
 # FASTAPI APP
@@ -44,7 +44,19 @@ app = FastAPI(
 
 
 # ======================================================
-# AI CHAT
+# AI CHAT MODELS
+# ======================================================
+
+class AIChatRequest(BaseModel):
+    message: str = Field(min_length=1, max_length=2000)
+
+
+class AIChatResponse(BaseModel):
+    reply: str
+
+
+# ======================================================
+# AI CHAT ENDPOINT
 # ======================================================
 
 @app.post("/ai/chat", response_model=AIChatResponse)
@@ -72,6 +84,7 @@ def ai_chat(request: AIChatRequest):
             status_code=502,
             detail="The AI assistant is temporarily unavailable. Please try again."
         )
+
 
 
 
