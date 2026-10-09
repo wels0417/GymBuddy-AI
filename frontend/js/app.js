@@ -14,6 +14,31 @@ function getUserId() {
 }
 
 
+function validateRegistration(email, age) {
+    const cleanEmail = email.trim();
+    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    const numericAge = Number(age);
+
+    if (!Number.isInteger(numericAge) || numericAge < 13) {
+        alert("You must be at least 13 years old to register.");
+        return false;
+    }
+
+    if (!emailPattern.test(cleanEmail)) {
+        alert("Please enter a valid email address.");
+        return false;
+    }
+
+    const domain = cleanEmail.split("@").pop();
+
+    if (!domain.toLowerCase().endsWith(".com")) {
+        alert("Your email address must end with .com.");
+        return false;
+    }
+
+    return true;
+}
+
 // ======================================================
 // HELPER: SAFE JSON RESPONSE
 // ======================================================
@@ -230,10 +255,16 @@ if (registerForm) {
             const password =
                 document.getElementById("password").value;
 
-            const age =
-                parseInt(
-                    document.getElementById("age").value
-                );
+
+            const age = parseInt(
+                document.getElementById("age").value,
+                10
+            );
+
+if (!validateRegistration(email, age)) {
+    return;
+}
+
 
             const fitnessGoalElement =
                 document.getElementById("fitness_goal");
