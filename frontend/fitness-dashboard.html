@@ -1,0 +1,415 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymBuddy AI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #202638;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 7%;
+            background: white;
+            border-bottom: 1px solid #e8eaf0;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: 800;
+            color: #635bff;
+        }
+
+        .page-content {
+            max-width: 1000px;
+            margin: 70px auto;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .page-content h1 {
+            font-size: clamp(30px, 5vw, 46px);
+            margin-bottom: 12px;
+        }
+
+        .page-content p {
+            color: #687084;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .chat-launcher {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 62px;
+            height: 62px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7168ff, #5146e5);
+            color: white;
+            font-size: 27px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px #5146e555;
+            z-index: 1000;
+        }
+
+        .chat-box {
+            display: none;
+            position: fixed;
+            right: 24px;
+            bottom: 100px;
+            width: 370px;
+            max-width: calc(100vw - 32px);
+            height: 510px;
+            max-height: calc(100dvh - 125px);
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 12px 45px #20263830;
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        .chat-box.open {
+            display: flex;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 17px;
+            color: white;
+            background: linear-gradient(135deg, #7168ff, #5146e5);
+        }
+
+        .chat-header h2 {
+            font-size: 17px;
+            margin: 0 0 5px;
+        }
+
+        .chat-status {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .chat-close {
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message {
+            max-width: 88%;
+            padding: 11px 13px;
+            border-radius: 13px;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .message.bot {
+            align-self: flex-start;
+            background: #f0f1f8;
+            color: #252b3b;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: #635bff;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-form {
+            display: flex;
+            gap: 8px;
+            padding: 12px;
+            border-top: 1px solid #eceef3;
+        }
+
+        .chat-input {
+            flex: 1;
+            min-width: 0;
+            padding: 12px;
+            border: 1px solid #dfe2eb;
+            border-radius: 10px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .chat-input:focus {
+            border-color: #635bff;
+        }
+
+        .chat-send {
+            border: none;
+            border-radius: 10px;
+            padding: 0 15px;
+            background: #635bff;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .chat-send:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .typing {
+            color: #687084;
+            font-size: 13px;
+            padding: 0 16px 10px;
+        }
+
+        @media (max-width: 480px) {
+            .chat-box {
+                right: 12px;
+                bottom: 86px;
+                width: calc(100vw - 24px);
+                height: min(510px, calc(100dvh - 105px));
+            }
+
+            .chat-launcher {
+                right: 16px;
+                bottom: 16px;
+            }
+
+            .page-header {
+                padding: 16px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="page-header">
+        <div class="brand">GymBuddy AI</div>
+    </header>
+
+    <main class="page-content">
+        <h1>Welcome to GymBuddy AI!</h1>
+        <p>
+            Your AI fitness assistant is ready to help with workout ideas,
+            exercise explanations, and general fitness questions.
+        </p>
+        <p>
+            Click the chat button in the bottom-right corner to get started.
+        </p>
+    </main>
+
+    <!-- Floating AI Chat Button -->
+    <button
+        id="gymbuddy-chat-button"
+        class="chat-launcher"
+        type="button"
+        aria-label="Open GymBuddy AI chat"
+        aria-controls="gymbuddy-chat-box"
+        aria-expanded="false"
+    >💬</button>
+
+    <!-- AI Chat Window -->
+    <section
+        id="gymbuddy-chat-box"
+        class="chat-box"
+        role="dialog"
+        aria-label="GymBuddy AI chat"
+        aria-hidden="true"
+    >
+        <div class="chat-header">
+            <div>
+                <h2>GymBuddy AI</h2>
+                <div class="chat-status">Your fitness assistant</div>
+            </div>
+
+            <button
+                id="gymbuddy-chat-close"
+                class="chat-close"
+                type="button"
+                aria-label="Close chat"
+            >&times;</button>
+        </div>
+
+        <div
+            id="gymbuddy-chat-messages"
+            class="chat-messages"
+            aria-live="polite"
+        >
+            <div class="message bot">
+                Hi! I'm GymBuddy AI. How can I help with your fitness goals today?
+            </div>
+        </div>
+
+        <div id="gymbuddy-chat-typing" class="typing" hidden>
+            GymBuddy AI is thinking...
+        </div>
+
+        <form id="gymbuddy-chat-form" class="chat-form">
+            <input
+                id="gymbuddy-chat-input"
+                class="chat-input"
+                type="text"
+                placeholder="Ask a fitness question..."
+                autocomplete="off"
+                required
+            >
+
+            <button
+                id="gymbuddy-chat-send"
+                class="chat-send"
+                type="submit"
+            >Send</button>
+        </form>
+    </section>
+
+    <script>
+        const GYMBUDDY_API =
+            "https://gymbuddy-ai-production.up.railway.app";
+
+        const chatButton =
+            document.getElementById("gymbuddy-chat-button");
+
+        const chatBox =
+            document.getElementById("gymbuddy-chat-box");
+
+        const chatClose =
+            document.getElementById("gymbuddy-chat-close");
+
+        const chatForm =
+            document.getElementById("gymbuddy-chat-form");
+
+        const chatInput =
+            document.getElementById("gymbuddy-chat-input");
+
+        const chatSend =
+            document.getElementById("gymbuddy-chat-send");
+
+        const chatMessages =
+            document.getElementById("gymbuddy-chat-messages");
+
+        const chatTyping =
+            document.getElementById("gymbuddy-chat-typing");
+
+        function openChat() {
+            chatBox.classList.add("open");
+            chatBox.setAttribute("aria-hidden", "false");
+            chatButton.setAttribute("aria-expanded", "true");
+            chatInput.focus();
+        }
+
+        function closeChat() {
+            chatBox.classList.remove("open");
+            chatBox.setAttribute("aria-hidden", "true");
+            chatButton.setAttribute("aria-expanded", "false");
+        }
+
+        chatButton.addEventListener("click", () => {
+            if (chatBox.classList.contains("open")) {
+                closeChat();
+            } else {
+                openChat();
+            }
+        });
+
+        chatClose.addEventListener("click", closeChat);
+
+        function addMessage(text, sender) {
+            const message = document.createElement("div");
+            message.className = `message ${sender}`;
+            message.textContent = text;
+
+            chatMessages.appendChild(message);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        chatForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const message = chatInput.value.trim();
+
+            if (!message || chatSend.disabled) {
+                return;
+            }
+
+            addMessage(message, "user");
+
+            chatInput.value = "";
+            chatSend.disabled = true;
+            chatTyping.hidden = false;
+
+            try {
+                const response = await fetch(
+                    `${GYMBUDDY_API}/ai/chat`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            message: message
+                        })
+                    }
+                );
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(
+                        data.detail || "The AI request failed."
+                    );
+                }
+
+                addMessage(
+                    data.reply || "I couldn't generate a response. Please try again.",
+                    "bot"
+                );
+
+            } catch (error) {
+                console.error("GymBuddy AI error:", error);
+
+                addMessage(
+                    "Sorry, I couldn't connect to GymBuddy AI. Please try again.",
+                    "bot"
+                );
+
+            } finally {
+                chatTyping.hidden = true;
+                chatSend.disabled = false;
+                chatInput.focus();
+            }
+        });
+    </script>
+
+</body>
+</html>
+```
