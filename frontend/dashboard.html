@@ -148,59 +148,83 @@
 
 <!-- GymBuddy AI Floating Chat -->
 
+
+<!-- ==========================================
+     GYMBUDDY AI CHAT WIDGET
+=========================================== -->
+
 <style>
-    /* Floating chat launcher */
+    #gymbuddy-chat-button,
+    #gymbuddy-chat-box {
+        font-family: Inter, -apple-system, BlinkMacSystemFont,
+            "Segoe UI", sans-serif;
+        box-sizing: border-box;
+    }
+
+    #gymbuddy-chat-button *,
+    #gymbuddy-chat-box * {
+        box-sizing: border-box;
+    }
+
+    /* Floating launcher */
     #gymbuddy-chat-button {
         position: fixed;
-        right: 28px;
-        bottom: 28px;
+        right: 26px;
+        bottom: 26px;
         z-index: 9999;
         display: flex;
         align-items: center;
-        gap: 10px;
-        padding: 15px 22px;
+        gap: 11px;
+        padding: 14px 21px;
         border: none;
         border-radius: 50px;
-        background: linear-gradient(135deg, #2563eb, #4f46e5);
         color: #fff;
-        font-size: 15px;
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        font-size: 14px;
         font-weight: 700;
         cursor: pointer;
-        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.35);
+        box-shadow: 0 8px 28px rgba(37, 99, 235, 0.32);
         transition: transform 0.2s, box-shadow 0.2s;
     }
 
     #gymbuddy-chat-button:hover {
         transform: translateY(-3px);
-        box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
+        box-shadow: 0 12px 32px rgba(37, 99, 235, 0.4);
+    }
+
+    .gymbuddy-launcher-icon {
+        font-size: 21px;
     }
 
     /* Main chat window */
     #gymbuddy-chat-box {
         position: fixed;
-        right: 28px;
-        bottom: 100px;
+        right: 26px;
+        bottom: 94px;
         z-index: 9999;
-        width: 370px;
-        max-width: calc(100vw - 32px);
-        height: 520px;
-        max-height: calc(100vh - 130px);
         display: none;
         flex-direction: column;
+        width: 390px;
+        max-width: calc(100vw - 32px);
+        height: 570px;
+        max-height: calc(100dvh - 120px);
         overflow: hidden;
-        background: #fff;
-        border: 1px solid #e5e7eb;
+        border: 1px solid #e2e8f0;
         border-radius: 22px;
-        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.2);
-        font-family: Inter, -apple-system, BlinkMacSystemFont,
-                     "Segoe UI", sans-serif;
-        animation: gymbuddy-appear 0.22s ease-out;
+        background: #fff;
+        box-shadow: 0 22px 65px rgba(15, 23, 42, 0.22);
+        color: #0f172a;
     }
 
-    @keyframes gymbuddy-appear {
+    #gymbuddy-chat-box.gymbuddy-open {
+        display: flex;
+        animation: gymbuddy-open 0.25s ease-out;
+    }
+
+    @keyframes gymbuddy-open {
         from {
             opacity: 0;
-            transform: translateY(12px) scale(0.98);
+            transform: translateY(14px) scale(0.98);
         }
         to {
             opacity: 1;
@@ -208,38 +232,85 @@
         }
     }
 
-    /* Chat header */
+    /* Header */
     #gymbuddy-chat-header {
         display: flex;
         align-items: center;
         gap: 12px;
-        padding: 18px;
-        background: linear-gradient(135deg, #1d4ed8, #4338ca);
-        color: white;
-        font-size: 15px;
-        font-weight: 700;
+        padding: 17px;
+        color: #fff;
+        background: linear-gradient(120deg, #1d4ed8, #4338ca);
     }
 
-    #gymbuddy-chat-header::before {
-        content: "💪";
+    .gymbuddy-avatar {
         display: grid;
         place-items: center;
-        width: 43px;
-        height: 43px;
         flex-shrink: 0;
-        background: rgba(255, 255, 255, 0.17);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 14px;
-        font-size: 22px;
+        width: 46px;
+        height: 46px;
+        border: 1px solid rgba(255,255,255,0.25);
+        border-radius: 15px;
+        background: rgba(255,255,255,0.16);
+        font-size: 24px;
     }
 
-    /* Chat message area */
+    .gymbuddy-header-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .gymbuddy-header-title {
+        margin: 0;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 750;
+    }
+
+    .gymbuddy-header-status {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 5px;
+        color: #dbeafe;
+        font-size: 12px;
+    }
+
+    .gymbuddy-status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #4ade80;
+        box-shadow: 0 0 0 3px rgba(74,222,128,0.15);
+    }
+
+    #gymbuddy-chat-close {
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        width: 35px;
+        height: 35px;
+        border: none;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.13);
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    #gymbuddy-chat-close:hover {
+        background: rgba(255,255,255,0.25);
+    }
+
+    /* Messages */
     #gymbuddy-chat-messages {
         flex: 1;
+        min-height: 0;
         overflow-y: auto;
-        padding: 18px 14px;
+        padding: 18px 15px;
         background: #f8fafc;
         scroll-behavior: smooth;
+        overscroll-behavior: contain;
     }
 
     #gymbuddy-chat-messages::-webkit-scrollbar {
@@ -247,147 +318,495 @@
     }
 
     #gymbuddy-chat-messages::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
         border-radius: 10px;
+        background: #cbd5e1;
     }
 
-    /* Message bubbles */
+    .gymbuddy-welcome {
+        margin-bottom: 18px;
+        text-align: center;
+    }
+
+    .gymbuddy-welcome-icon {
+        display: grid;
+        place-items: center;
+        width: 55px;
+        height: 55px;
+        margin: 0 auto 10px;
+        border-radius: 18px;
+        background: #dbeafe;
+        font-size: 27px;
+    }
+
+    .gymbuddy-welcome h3 {
+        margin: 0 0 6px;
+        color: #0f172a;
+        font-size: 17px;
+    }
+
+    .gymbuddy-welcome p {
+        margin: 0;
+        color: #64748b;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
     .gymbuddy-message {
         width: fit-content;
-        max-width: 85%;
-        padding: 12px 14px;
+        max-width: 88%;
         margin-bottom: 13px;
+        padding: 12px 14px;
         border-radius: 16px;
-        white-space: pre-wrap;
-        overflow-wrap: anywhere;
         font-size: 14px;
         line-height: 1.65;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        animation: gymbuddy-message-in 0.18s ease-out;
+    }
+
+    @keyframes gymbuddy-message-in {
+        from {
+            opacity: 0;
+            transform: translateY(5px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .gymbuddy-user {
         margin-left: auto;
+        border-bottom-right-radius: 5px;
         color: #fff;
         background: linear-gradient(135deg, #2563eb, #4f46e5);
-        border-bottom-right-radius: 5px;
-        box-shadow: 0 3px 8px rgba(37, 99, 235, 0.13);
+        box-shadow: 0 3px 9px rgba(37,99,235,0.12);
     }
 
     .gymbuddy-bot {
         margin-right: auto;
-        color: #1e293b;
-        background: #fff;
         border: 1px solid #e2e8f0;
         border-bottom-left-radius: 5px;
+        color: #1e293b;
+        background: #fff;
     }
 
-    /* Message input area */
+    /* Suggested prompts */
+    #gymbuddy-suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin: 4px 0 15px;
+    }
+
+    .gymbuddy-suggestion {
+        padding: 9px 11px;
+        border: 1px solid #bfdbfe;
+        border-radius: 12px;
+        color: #1d4ed8;
+        background: #eff6ff;
+        font-size: 12px;
+        text-align: left;
+        cursor: pointer;
+        transition: background 0.2s, border-color 0.2s;
+    }
+
+    .gymbuddy-suggestion:hover {
+        border-color: #60a5fa;
+        background: #dbeafe;
+    }
+
+    /* Animated typing indicator */
+    .gymbuddy-typing {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        min-height: 42px;
+    }
+
+    .gymbuddy-typing span {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #64748b;
+        animation: gymbuddy-typing 1s infinite ease-in-out;
+    }
+
+    .gymbuddy-typing span:nth-child(2) {
+        animation-delay: 0.15s;
+    }
+
+    .gymbuddy-typing span:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    @keyframes gymbuddy-typing {
+        0%, 60%, 100% {
+            opacity: 0.35;
+            transform: translateY(0);
+        }
+        30% {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+    }
+
+    /* Input footer */
+    #gymbuddy-chat-footer {
+        flex-shrink: 0;
+        padding: 12px 14px 10px;
+        border-top: 1px solid #e2e8f0;
+        background: #fff;
+    }
+
     #gymbuddy-chat-form {
         display: flex;
         align-items: center;
-        gap: 9px;
-        padding: 13px;
-        background: #fff;
-        border-top: 1px solid #e5e7eb;
+        gap: 8px;
     }
 
     #gymbuddy-chat-input {
         flex: 1;
         width: 0;
         min-width: 0;
-        padding: 13px 14px;
-        border: 1px solid #e2e8f0;
+        padding: 12px 14px;
+        border: 1px solid #dbe3ef;
         border-radius: 14px;
         outline: none;
-        background: #f8fafc;
         color: #0f172a;
+        background: #f8fafc;
         font-family: inherit;
         font-size: 14px;
         transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     #gymbuddy-chat-input:focus {
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+        border-color: #60a5fa;
         background: #fff;
+        box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
     }
 
     #gymbuddy-chat-input::placeholder {
         color: #94a3b8;
     }
 
-    #gymbuddy-chat-form button {
+    #gymbuddy-chat-send {
+        display: grid;
+        place-items: center;
         flex-shrink: 0;
-        padding: 13px 16px;
+        width: 44px;
+        height: 44px;
         border: none;
         border-radius: 13px;
+        color: #fff;
         background: #2563eb;
-        color: white;
-        font-weight: 700;
+        font-size: 18px;
         cursor: pointer;
-        transition: background 0.2s;
+        transition: background 0.2s, transform 0.2s;
     }
 
-    #gymbuddy-chat-form button:hover {
+    #gymbuddy-chat-send:hover {
+        transform: translateY(-1px);
         background: #1d4ed8;
     }
 
-    #gymbuddy-chat-form button:disabled {
+    #gymbuddy-chat-send:disabled {
         opacity: 0.55;
-        cursor: not-allowed;
+        cursor: wait;
+        transform: none;
     }
 
-    /* Mobile layout */
+    .gymbuddy-footer-note {
+        margin: 8px 0 0;
+        color: #94a3b8;
+        font-size: 10px;
+        text-align: center;
+    }
+
+    /* Mobile */
     @media (max-width: 480px) {
         #gymbuddy-chat-button {
             right: 16px;
             bottom: 16px;
+            padding: 13px 17px;
         }
 
         #gymbuddy-chat-box {
-            right: 12px;
-            bottom: 82px;
-            width: calc(100vw - 24px);
-            height: min(520px, calc(100dvh - 100px));
-            max-height: calc(100dvh - 100px);
+            right: 8px;
+            bottom: 76px;
+            width: calc(100vw - 16px);
+            max-width: none;
+            height: min(620px, calc(100dvh - 90px));
+            max-height: calc(100dvh - 90px);
+            border-radius: 19px;
+        }
+
+        #gymbuddy-chat-header {
+            padding: 14px;
+        }
+
+        #gymbuddy-chat-messages {
+            padding: 15px 12px;
+        }
+
+        .gymbuddy-message {
+            max-width: 92%;
         }
     }
 
     @media (prefers-reduced-motion: reduce) {
-        #gymbuddy-chat-box,
+        #gymbuddy-chat-box *,
         #gymbuddy-chat-button {
-            animation: none;
-            transition: none;
+            animation: none !important;
+            transition: none !important;
+            scroll-behavior: auto !important;
         }
     }
 </style>
 
-<button id="gymbuddy-chat-button" type="button">
-    💬 Chat with GymBuddy AI
+<!-- Floating launcher -->
+<button
+    id="gymbuddy-chat-button"
+    type="button"
+    aria-controls="gymbuddy-chat-box"
+    aria-expanded="false"
+>
+    <span class="gymbuddy-launcher-icon">💬</span>
+    <span>Chat with GymBuddy AI</span>
 </button>
 
-<div id="gymbuddy-chat-box">
+<!-- Chat window -->
+<div id="gymbuddy-chat-box" role="dialog"
+     aria-label="GymBuddy AI chat" aria-hidden="true">
+
     <div id="gymbuddy-chat-header">
-        GymBuddy AI — Fitness Assistant
+        <div class="gymbuddy-avatar">💪</div>
+
+        <div class="gymbuddy-header-info">
+            <h2 class="gymbuddy-header-title">GymBuddy AI</h2>
+            <div class="gymbuddy-header-status">
+                <span class="gymbuddy-status-dot"></span>
+                Your fitness assistant
+            </div>
+        </div>
+
+        <button id="gymbuddy-chat-close" type="button"
+                aria-label="Close chat">&times;</button>
     </div>
 
     <div id="gymbuddy-chat-messages" aria-live="polite">
+        <div class="gymbuddy-welcome">
+            <div class="gymbuddy-welcome-icon">🏋️</div>
+            <h3>Let's reach your goals!</h3>
+            <p>Ask me about workouts, exercise, recovery, and fitness.</p>
+        </div>
+
         <div class="gymbuddy-message gymbuddy-bot">
-            Hi! I'm GymBuddy AI. Ask me about workouts, exercise,
-            recovery, or your fitness goals!
+            Hi! I'm GymBuddy AI. How can I help with your fitness journey today?
+        </div>
+
+        <div id="gymbuddy-suggestions">
+            <button class="gymbuddy-suggestion" type="button"
+                    data-prompt="Create a beginner workout plan for 3 days a week.">
+                💪 Beginner workout
+            </button>
+
+            <button class="gymbuddy-suggestion" type="button"
+                    data-prompt="Give me some safe post-workout recovery tips.">
+                🌿 Recovery tips
+            </button>
+
+            <button class="gymbuddy-suggestion" type="button"
+                    data-prompt="How can I stay consistent with my fitness goals?">
+                🎯 Fitness motivation
+            </button>
         </div>
     </div>
 
-    <form id="gymbuddy-chat-form">
-        <input
-            id="gymbuddy-chat-input"
-            type="text"
-            placeholder="Ask a fitness question..."
-            autocomplete="off"
-            required
-        >
-        <button id="gymbuddy-chat-send" type="submit">Send</button>
-    </form>
+    <div id="gymbuddy-chat-footer">
+        <form id="gymbuddy-chat-form">
+            <input
+                id="gymbuddy-chat-input"
+                type="text"
+                placeholder="Ask about your fitness..."
+                autocomplete="off"
+                aria-label="Your message"
+                required
+            >
+
+            <button id="gymbuddy-chat-send" type="submit"
+                    aria-label="Send message">➤</button>
+        </form>
+
+        <p class="gymbuddy-footer-note">
+            GymBuddy AI can make mistakes. Exercise safely.
+        </p>
+    </div>
 </div>
+
+<script>
+(() => {
+    const chatButton = document.getElementById("gymbuddy-chat-button");
+    const chatBox = document.getElementById("gymbuddy-chat-box");
+    const closeButton = document.getElementById("gymbuddy-chat-close");
+    const chatForm = document.getElementById("gymbuddy-chat-form");
+    const chatInput = document.getElementById("gymbuddy-chat-input");
+    const chatMessages = document.getElementById("gymbuddy-chat-messages");
+    const chatSend = document.getElementById("gymbuddy-chat-send");
+    const suggestions = document.getElementById("gymbuddy-suggestions");
+
+    // Keep your existing deployed FastAPI backend.
+    const GYMBUDDY_API =
+        "https://gymbuddy-ai-production.up.railway.app";
+
+    let isSending = false;
+
+    function openChat() {
+        chatBox.classList.add("gymbuddy-open");
+        chatBox.setAttribute("aria-hidden", "false");
+        chatButton.setAttribute("aria-expanded", "true");
+        chatInput.focus();
+    }
+
+    function closeChat() {
+        chatBox.classList.remove("gymbuddy-open");
+        chatBox.setAttribute("aria-hidden", "true");
+        chatButton.setAttribute("aria-expanded", "false");
+        chatButton.focus();
+    }
+
+    chatButton.addEventListener("click", () => {
+        if (chatBox.classList.contains("gymbuddy-open")) {
+            closeChat();
+        } else {
+            openChat();
+        }
+    });
+
+    closeButton.addEventListener("click", closeChat);
+
+    document.addEventListener("keydown", (event) => {
+        if (
+            event.key === "Escape" &&
+            chatBox.classList.contains("gymbuddy-open")
+        ) {
+            closeChat();
+        }
+    });
+
+    function scrollToBottom() {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addMessage(message, sender) {
+        const element = document.createElement("div");
+        element.className =
+            "gymbuddy-message " +
+            (sender === "user" ? "gymbuddy-user" : "gymbuddy-bot");
+
+        // Render messages as text, not HTML.
+        element.textContent = message;
+
+        // Place new messages before the suggested prompts.
+        chatMessages.insertBefore(element, suggestions);
+        scrollToBottom();
+
+        return element;
+    }
+
+    function showTypingIndicator() {
+        const indicator = document.createElement("div");
+        indicator.className = "gymbuddy-message gymbuddy-bot gymbuddy-typing";
+        indicator.setAttribute("role", "status");
+        indicator.setAttribute("aria-label", "GymBuddy AI is typing");
+
+        for (let i = 0; i < 3; i++) {
+            indicator.appendChild(document.createElement("span"));
+        }
+
+        chatMessages.insertBefore(indicator, suggestions);
+        scrollToBottom();
+
+        return indicator;
+    }
+
+    async function sendMessage(text) {
+        const message = text.trim();
+
+        if (!message || isSending) return;
+
+        isSending = true;
+        chatInput.disabled = true;
+        chatSend.disabled = true;
+
+        addMessage(message, "user");
+
+        // Hide suggestions after the conversation starts.
+        suggestions.hidden = true;
+
+        chatInput.value = "";
+
+        const typingIndicator = showTypingIndicator();
+
+        try {
+            const response = await fetch(`${GYMBUDDY_API}/ai/chat`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.detail || `Request failed (${response.status})`
+                );
+            }
+
+            typingIndicator.remove();
+
+            addMessage(
+                data.reply || "I couldn't generate a response. Please try again.",
+                "bot"
+            );
+
+        } catch (error) {
+            console.error("GymBuddy AI chat error:", error);
+
+            typingIndicator.remove();
+
+            addMessage(
+                "Sorry, I couldn't get a response right now. Please try again.",
+                "bot"
+            );
+
+        } finally {
+            isSending = false;
+            chatInput.disabled = false;
+            chatSend.disabled = false;
+            chatInput.focus();
+            scrollToBottom();
+        }
+    }
+
+    chatForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        sendMessage(chatInput.value);
+    });
+
+    // Suggested questions send messages directly.
+    suggestions.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-prompt]");
+
+        if (button && !isSending) {
+            sendMessage(button.dataset.prompt);
+        }
+    });
+})();
+</script>
+
 
 <script>
     const chatButton = document.getElementById("gymbuddy-chat-button");
