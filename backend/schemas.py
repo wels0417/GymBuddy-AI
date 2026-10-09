@@ -3,6 +3,12 @@ from typing import Optional
 from datetime import time
 
 
+
+from pydantic import BaseModel, field_validator
+from typing import Optional
+import re
+
+
 class UserCreate(BaseModel):
     name: str
     email: str
@@ -10,6 +16,30 @@ class UserCreate(BaseModel):
     age: int
     fitness_goal: Optional[str] = None
     experience_level: Optional[str] = None
+
+    @field_validator("age")
+    @classmethod
+    def validate_age(cls, value):
+        if value < 13:
+            raise ValueError("You must be at least 13 years old to register.")
+        return value
+
+    @field_validator("email")
+    @classmethod
+    def validate_email(cls, value):
+        value = value.strip()
+
+        email_pattern = r"^[^@\s]+@[^@\s]+\.[^@\s]+$"
+
+        if not re.match(email_pattern, value):
+            raise ValueError("Please enter a valid email address.")
+
+        domain = value.rsplit("@", 1)[1]
+
+        if not domain.lower().endswith(".com"):
+            raise ValueError("Email address must end with .com.")
+
+        return value
 
 
 class UserResponse(BaseModel):

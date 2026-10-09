@@ -2,7 +2,7 @@
 // GYMBUDDY AI - MAIN JAVASCRIPT
 // ======================================================
 
-const API_URL = "";
+const API_URL = "https://gymbuddy-ai-production.up.railway.app";
 
 
 // ======================================================
@@ -293,28 +293,23 @@ if (!validateRegistration(email, age)) {
                         : null
             };
 
-            console.log(
-                "Registering user:",
-                user
-            );
+            console.log("Registering user:", {
+    name: user.name,
+    email: user.email
+});
 
             try {
 
                 const response =
-                    await fetch(
-                        `${API_URL}/users`,
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify(user)
-                        }
-                    );
+                    await fetch("https://gymbuddy-ai-production.up.railway.app/users", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        // Keep your existing registration fields here.
+    })
+});
 
                 const data =
                     await getResponseData(response);
