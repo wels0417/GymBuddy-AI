@@ -31,7 +31,6 @@ def get_ai_response(message: str) -> str:
         contents=message,
         config=types.GenerateContentConfig(
             system_instruction=SYSTEM_PROMPT,
-            max_output_tokens=300,
             temperature=0.7,
         ),
     )
