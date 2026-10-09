@@ -5,6 +5,11 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from pathlib import Path
 
+
+from fastapi import HTTPException
+from pydantic import BaseModel, Field
+from backend.ai_chat import get_ai_response
+
 from backend.database import engine, get_db
 from backend import models
 from backend import crud
@@ -25,6 +30,40 @@ from backend.schemas import (
     LoginResponse
 )
 
+
+class AIChatRequest(BaseModel):
+    message: str = Field(min_length=1, max_length=2000)
+
+
+class AIChatResponse(BaseModel):
+    reply: str
+
+
+@app.post("/ai/chat", response_model=AIChatResponse)
+def ai_chat(request: AIChatRequest):
+    message = request.message.strip()
+
+    if not message:
+        raise HTTPException(
+            status_code=400,
+            detail="Please enter a message."
+        )
+
+    try:
+        reply = get_ai_response(message)
+        return AIChatResponse(reply=reply)
+
+    except RuntimeError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail=str(exc)
+        )
+
+    except Exception:
+        raise HTTPException(
+            status_code=502,
+            detail="The AI assistant is temporarily unavailable. Please try again."
+        )
 
 # ======================================================
 # CREATE DATABASE TABLES
