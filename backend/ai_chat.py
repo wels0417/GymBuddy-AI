@@ -1,9 +1,9 @@
-
 import os
 from google import genai
-from google.genai import types
 
 api_key = os.getenv("GEMINI_API_KEY")
+print("Gemini API key detected:", bool(api_key))
+
 client = genai.Client(api_key=api_key) if api_key else None
 
 SYSTEM_PROMPT = """
