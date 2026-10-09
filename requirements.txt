@@ -5,4 +5,4 @@ pydantic
 scikit-learn
 pandas
 numpy
-openai
+google-genai
