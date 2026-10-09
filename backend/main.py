@@ -27,19 +27,25 @@ from backend.schemas import (
 )
 
 
-from fastapi import HTTPException
+
 from pydantic import BaseModel, Field
 from backend.ai_chat import get_ai_response
 
-app = FastAPI()
 
-class AIChatRequest(BaseModel):
-    message: str = Field(min_length=1, max_length=2000)
+# ======================================================
+# FASTAPI APP
+# ======================================================
+
+app = FastAPI(
+    title="GymBuddy AI API",
+    description="AI-Based Workout Partner Recommendation System",
+    version="1.0.0"
+)
 
 
-class AIChatResponse(BaseModel):
-    reply: str
-
+# ======================================================
+# AI CHAT
+# ======================================================
 
 @app.post("/ai/chat", response_model=AIChatResponse)
 def ai_chat(request: AIChatRequest):
@@ -67,22 +73,6 @@ def ai_chat(request: AIChatRequest):
             detail="The AI assistant is temporarily unavailable. Please try again."
         )
 
-# ======================================================
-# CREATE DATABASE TABLES
-# ======================================================
-
-models.Base.metadata.create_all(bind=engine)
-
-
-# ======================================================
-# FASTAPI APP
-# ======================================================
-
-app = FastAPI(
-    title="GymBuddy AI API",
-    description="AI-Based Workout Partner Recommendation System",
-    version="1.0.0"
-)
 
 
 # ======================================================
