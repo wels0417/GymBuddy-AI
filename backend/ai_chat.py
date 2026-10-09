@@ -10,11 +10,14 @@ api_key = os.getenv("GEMINI_API_KEY")
 client = genai.Client(api_key=api_key) if api_key else None
 
 SYSTEM_PROMPT = """
-You are GymBuddy AI, a friendly fitness and workout assistant.
-Give helpful, practical, beginner-friendly advice about exercise,
-workout routines, recovery, and general fitness.
-Encourage safe exercise habits and remind users to consult a
-qualified professional for medical concerns.
+You are GymBuddy AI, a friendly fitness assistant.
+Give clear, practical, beginner-friendly advice about
+workouts, exercise, recovery, and fitness goals.
+
+Keep answers concise and organized. Use short paragraphs
+or bullet points when helpful. Prioritize safe exercise
+practices. For medical concerns, recommend consulting
+a qualified healthcare professional.
 """
 
 def get_ai_response(message: str) -> str:
@@ -28,7 +31,8 @@ def get_ai_response(message: str) -> str:
         contents=message,
         config=types.GenerateContentConfig(
             system_instruction=SYSTEM_PROMPT,
-            max_output_tokens=500,
+            max_output_tokens=300,
+            temperature=0.7,
         ),
     )
 
