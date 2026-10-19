@@ -235,130 +235,90 @@ if (loginForm) {
 // REGISTER
 // ======================================================
 
-const registerForm =
-    document.getElementById("registerForm");
+
+const API_URL = "https://gymbuddy-ai-production.up.railway.app";
+
+const registerForm = document.getElementById("registerForm");
 
 if (registerForm) {
+    registerForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-    registerForm.addEventListener(
-        "submit",
-        async function (event) {
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const age = Number(document.getElementById("age").value);
 
-            event.preventDefault();
+        const user = {
+            name: name,
+            email: email,
+            password: password,
+            age: age,
 
-            const name =
-                document.getElementById("name").value.trim();
+            // Defaults in case your backend requires these fields.
+            fitness_goal: "General fitness",
+            experience_level: "Beginner"
+        };
 
-            const email =
-                document.getElementById("email").value.trim();
+        try {
+            const response = await fetch(`${API_URL}/users`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(user)
+            });
 
-            const password =
-                document.getElementById("password").value;
+            // Read the response safely, even if it isn't JSON.
+            const responseText = await response.text();
 
-
-            const age = parseInt(
-                document.getElementById("age").value,
-                10
-            );
-
-if (!validateRegistration(email, age)) {
-    return;
-}
-
-
-            const fitnessGoalElement =
-                document.getElementById("fitness_goal");
-
-            const experienceElement =
-                document.getElementById("experience_level");
-
-            const user = {
-
-                name: name,
-
-                email: email,
-
-                password: password,
-
-                age: age,
-
-                fitness_goal:
-                    fitnessGoalElement
-                        ? fitnessGoalElement.value
-                        : null,
-
-                experience_level:
-                    experienceElement
-                        ? experienceElement.value
-                        : null
-            };
-
-            console.log("Registering user:", {
-    name: user.name,
-    email: user.email
-});
-
+            let data;
             try {
+                data = responseText ? JSON.parse(responseText) : {};
+            } catch {
+                data = { detail: responseText };
+            }
 
-                const response =
-                    await fetch("https://gymbuddy-ai-production.up.railway.app/users", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        // Keep your existing registration fields here.
-    })
-});
+            if (!response.ok) {
+                // FastAPI validation errors may be an array of objects.
+                let errorMessage = data.detail || data.message || data;
 
-                const data =
-                    await getResponseData(response);
-
-                if (response.ok) {
-
-                    localStorage.setItem(
-                        "user_id",
-                        String(data.user_id)
-                    );
-
-                    localStorage.setItem(
-                        "user_name",
-                        data.name || name
-                    );
-
-                    localStorage.setItem(
-                        "user_email",
-                        data.email || email
-                    );
-
-                    alert(
-                        "Account created successfully!"
-                    );
-
-                    window.location.href =
-                        "profile.html";
-
-                } else {
-
-                    alert(
-                        data.detail ||
-                        "Registration failed."
-                    );
+                if (Array.isArray(errorMessage)) {
+                    errorMessage = errorMessage
+                        .map(error => {
+                            if (typeof error === "string") return error;
+                            return error.msg || JSON.stringify(error);
+                        })
+                        .join("\n");
+                } else if (typeof errorMessage === "object") {
+                    errorMessage = JSON.stringify(errorMessage, null, 2);
                 }
 
-            } catch (error) {
-
-                console.error(
-                    "Registration error:",
-                    error
-                );
-
-                alert(
-                    "Unable to connect to GymBuddy AI server."
-                );
+                alert("Registration failed:\n" + errorMessage);
+                return;
             }
+
+            // Save the account information returned by the API.
+            if (data.user_id !== undefined) {
+                localStorage.setItem("user_id", data.user_id);
+            }
+
+            localStorage.setItem("user_name", data.name || name);
+            localStorage.setItem("user_email", data.email || email);
+
+            alert("Account created successfully!");
+
+            window.location.href = "profile.html";
+
+        } catch (error) {
+            console.error("Registration error:", error);
+
+            alert(
+                "Could not connect to GymBuddy AI. " +
+                "Please check your internet connection and try again."
+            );
         }
-    );
+    });
 }
 
 
