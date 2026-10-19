@@ -231,10 +231,10 @@ if (loginForm) {
 }
 
 
-// ======================================================
-// REGISTER
-// ======================================================
 
+ // ======================================================
+ // REGISTER
+ // ======================================================
 
 const registerForm = document.getElementById("registerForm");
 
@@ -266,45 +266,64 @@ if (registerForm) {
         }
 
         try {
-            // STEP 1: Create the account
-       const response = await fetch(`${API_URL}/users`, {
-    method: "POST",
+            // STEP 1: Prepare registration data
+            const registrationData = {
+                name: name,
+                email: email,
+                password: password,
+                age: age
+            };
 
-    // PUT THE HEADER HERE
-    headers: {
-        "Content-Type": "application/json"
-    },
+            // Log the payload without exposing the password
+            console.log("Registration payload:", {
+                ...registrationData,
+                password: "[hidden]"
+            });
 
-    // SEND THE REGISTRATION DATA HERE
-    body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
-        age: Number(age),
-        fitness_goal: "General fitness",
-        experience_level: "Beginner"
-    })
-});
+            // STEP 2: Send registration data to the backend
+            const response = await fetch(`${API_URL}/users`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(registrationData)
+            });
 
             const data = await getResponseData(response);
 
+            console.log("Registration status:", response.status);
+            console.log("Registration response:", data);
+
+            // STEP 3: Handle registration errors
             if (!response.ok) {
-                let message = data.detail || data.message ||
+                console.error("Registration failed:", data);
+
+                let message =
                     "Registration failed. Please try again.";
 
-                if (Array.isArray(message)) {
-                    message = message.map(item =>
-                        typeof item === "string" ? item : item.msg
-                    ).join("\n");
-                } else if (typeof message === "object") {
-                    message = JSON.stringify(message);
+                if (Array.isArray(data.detail)) {
+                    message = data.detail.map(item => {
+                        const field = Array.isArray(item.loc)
+                            ? item.loc.join(".")
+                            : "unknown field";
+
+                        return `${field}: ${
+                            item.msg || "Invalid value"
+                        }`;
+                    }).join("\n");
+                } else if (typeof data.detail === "string") {
+                    message = data.detail;
+                } else if (data.detail) {
+                    message = JSON.stringify(data.detail);
+                } else if (data.message) {
+                    message = data.message;
                 }
 
                 alert("Registration failed:\n" + message);
                 return;
             }
 
-            // STEP 2: Get the user ID returned by registration
+            // STEP 4: Get the registered user's information
             let userId =
                 data.user_id ??
                 data.id ??
@@ -314,24 +333,32 @@ if (registerForm) {
             let userName = data.name || data.user?.name || name;
             let userEmail = data.email || data.user?.email || email;
 
-            // STEP 3: If registration did not return an ID,
-            // try logging in with the newly created account.
+            // STEP 5: Log in automatically if no user ID was returned
             if (userId == null) {
                 const loginResponse = await fetch(`${API_URL}/login`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ email, password })
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
                 });
 
                 const loginData = await getResponseData(loginResponse);
 
-                if (!loginResponse.ok || loginData.user_id == null) {
+                if (
+                    !loginResponse.ok ||
+                    loginData.user_id == null
+                ) {
+                    console.error("Automatic login failed:", loginData);
+
                     alert(
-                        "Your account was created, but automatic login " +
-                        "failed. Please log in using your new account."
+                        "Your account was created, but automatic login failed. " +
+                        "Please log in using your new account."
                     );
+
                     window.location.href = "login.html";
                     return;
                 }
@@ -341,141 +368,27 @@ if (registerForm) {
                 userEmail = loginData.email || userEmail;
             }
 
-            // STEP 4: Save the user information
+            // STEP 6: Save user information for the dashboard
             localStorage.setItem("user_id", String(userId));
             localStorage.setItem("user_name", userName);
             localStorage.setItem("user_email", userEmail);
 
-            // STEP 5: Go directly to the dashboard
+            // STEP 7: Redirect to the dashboard
             window.location.replace("dashboard.html");
 
         } catch (error) {
             console.error("Registration error:", error);
 
             alert(
-                "Unable to connect to GymBuddy AI. " +
-                "Please try again."
+                "Unable to connect to GymBuddy AI. Please try again."
             );
         } finally {
             if (registerButton) {
                 registerButton.disabled = false;
-                registerButton.textContent = "Register";
+                registerButton.textContent = "Create Account";
             }
         }
     });
-}
-
-
-// ======================================================
-// CREATE FITNESS PROFILE
-// ======================================================
-
-const profileForm =
-    document.getElementById("profileForm");
-
-if (profileForm) {
-
-    profileForm.addEventListener(
-        "submit",
-        async function (event) {
-
-            event.preventDefault();
-
-            if (!requireLogin()) {
-                return;
-            }
-
-            const userId = getUserId();
-
-            const profile = {
-
-                user_id:
-                    parseInt(userId),
-
-                fitness_goal:
-                document.getElementById(
-                    "fitness_goal"
-                ).value,
-
-                experience_level:
-                document.getElementById(
-                    "experience_level"
-                ).value,
-
-                workout_type:
-                document.getElementById(
-                    "workout_type"
-                ).value,
-
-                intensity:
-                document.getElementById(
-                    "intensity"
-                ).value,
-
-                workout_frequency:
-                    parseInt(
-                        document.getElementById(
-                            "workout_frequency"
-                        ).value
-                    )
-            };
-
-            console.log(
-                "Creating fitness profile:",
-                profile
-            );
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/profiles`,
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify(profile)
-                        }
-                    );
-
-                const data =
-                    await getResponseData(response);
-
-                if (response.ok) {
-
-                    alert(
-                        "Fitness profile saved successfully!"
-                    );
-
-                    window.location.href =
-                        "preferences.html";
-
-                } else {
-
-                    alert(
-                        data.detail ||
-                        "Unable to save fitness profile."
-                    );
-                }
-
-            } catch (error) {
-
-                console.error(
-                    "Profile error:",
-                    error
-                );
-
-                alert(
-                    "Unable to connect to GymBuddy AI server."
-                );
-            }
-        }
-    );
 }
 
 
