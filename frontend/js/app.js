@@ -236,8 +236,6 @@ if (loginForm) {
 // ======================================================
 
 
-const API_URL = "https://gymbuddy-ai-production.up.railway.app";
-
 const registerForm = document.getElementById("registerForm");
 
 if (registerForm) {
@@ -249,74 +247,116 @@ if (registerForm) {
         const password = document.getElementById("password").value;
         const age = Number(document.getElementById("age").value);
 
-        const user = {
-            name: name,
-            email: email,
-            password: password,
-            age: age,
+        if (!name || !email || !password || !age) {
+            alert("Please complete all registration fields.");
+            return;
+        }
 
-            // Defaults in case your backend requires these fields.
-            fitness_goal: "General fitness",
-            experience_level: "Beginner"
-        };
+        if (!validateRegistration(email, age)) {
+            return;
+        }
+
+        const registerButton = registerForm.querySelector(
+            'button[type="submit"]'
+        );
+
+        if (registerButton) {
+            registerButton.disabled = true;
+            registerButton.textContent = "Creating account...";
+        }
 
         try {
+            // STEP 1: Create the account
             const response = await fetch(`${API_URL}/users`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(user)
+                body: JSON.stringify({
+                    name,
+                    email,
+                    password,
+                    age,
+                    fitness_goal: "General fitness",
+                    experience_level: "Beginner"
+                })
             });
 
-            // Read the response safely, even if it isn't JSON.
-            const responseText = await response.text();
-
-            let data;
-            try {
-                data = responseText ? JSON.parse(responseText) : {};
-            } catch {
-                data = { detail: responseText };
-            }
+            const data = await getResponseData(response);
 
             if (!response.ok) {
-                // FastAPI validation errors may be an array of objects.
-                let errorMessage = data.detail || data.message || data;
+                let message = data.detail || data.message ||
+                    "Registration failed. Please try again.";
 
-                if (Array.isArray(errorMessage)) {
-                    errorMessage = errorMessage
-                        .map(error => {
-                            if (typeof error === "string") return error;
-                            return error.msg || JSON.stringify(error);
-                        })
-                        .join("\n");
-                } else if (typeof errorMessage === "object") {
-                    errorMessage = JSON.stringify(errorMessage, null, 2);
+                if (Array.isArray(message)) {
+                    message = message.map(item =>
+                        typeof item === "string" ? item : item.msg
+                    ).join("\n");
+                } else if (typeof message === "object") {
+                    message = JSON.stringify(message);
                 }
 
-                alert("Registration failed:\n" + errorMessage);
+                alert("Registration failed:\n" + message);
                 return;
             }
 
-            // Save the account information returned by the API.
-            if (data.user_id !== undefined) {
-                localStorage.setItem("user_id", data.user_id);
+            // STEP 2: Get the user ID returned by registration
+            let userId =
+                data.user_id ??
+                data.id ??
+                data.user?.user_id ??
+                data.user?.id;
+
+            let userName = data.name || data.user?.name || name;
+            let userEmail = data.email || data.user?.email || email;
+
+            // STEP 3: If registration did not return an ID,
+            // try logging in with the newly created account.
+            if (userId == null) {
+                const loginResponse = await fetch(`${API_URL}/login`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const loginData = await getResponseData(loginResponse);
+
+                if (!loginResponse.ok || loginData.user_id == null) {
+                    alert(
+                        "Your account was created, but automatic login " +
+                        "failed. Please log in using your new account."
+                    );
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                userId = loginData.user_id;
+                userName = loginData.name || userName;
+                userEmail = loginData.email || userEmail;
             }
 
-            localStorage.setItem("user_name", data.name || name);
-            localStorage.setItem("user_email", data.email || email);
+            // STEP 4: Save the user information
+            localStorage.setItem("user_id", String(userId));
+            localStorage.setItem("user_name", userName);
+            localStorage.setItem("user_email", userEmail);
 
-            alert("Account created successfully!");
-
-            window.location.href = "profile.html";
+            // STEP 5: Go directly to the dashboard
+            window.location.replace("dashboard.html");
 
         } catch (error) {
             console.error("Registration error:", error);
 
             alert(
-                "Could not connect to GymBuddy AI. " +
-                "Please check your internet connection and try again."
+                "Unable to connect to GymBuddy AI. " +
+                "Please try again."
             );
+        } finally {
+            if (registerButton) {
+                registerButton.disabled = false;
+                registerButton.textContent = "Register";
+            }
         }
     });
 }
