@@ -267,20 +267,24 @@ if (registerForm) {
 
         try {
             // STEP 1: Create the account
-            const response = await fetch(`${API_URL}/users`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    name,
-                    email,
-                    password,
-                    age,
-                    fitness_goal: "General fitness",
-                    experience_level: "Beginner"
-                })
-            });
+       const response = await fetch(`${API_URL}/users`, {
+    method: "POST",
+
+    // PUT THE HEADER HERE
+    headers: {
+        "Content-Type": "application/json"
+    },
+
+    // SEND THE REGISTRATION DATA HERE
+    body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+        age: Number(age),
+        fitness_goal: "General fitness",
+        experience_level: "Beginner"
+    })
+});
 
             const data = await getResponseData(response);
 
